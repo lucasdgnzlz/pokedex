@@ -1,11 +1,16 @@
 :root {
   --color-rojo-general: #dd0329;
   --color-blanco-fondo: #ededed;
-  --color-celeste-items: #2972B8;
+  --color-celeste-items: #2972b8;
+
+  --color-fondo-imagen-pokemon: #1e1e1e;
+  --color-borde-imagen-pokemon: #dfdfdf;
+
+  --color-amarillo-logo: #ffcb05;
 }
 
 body {
-  background-color: var(--color-blanco-fondo);
+  background-color: var(--color-fondo-imagen-pokemon);
 }
 .contenedor-estructura-main {
   max-width: 100vw;
@@ -30,11 +35,86 @@ header {
   height: 90px;
 }
 .contenedor-buscador {
-  margin: 15px 0;
+  margin: 20px 0;
   margin-top: 0;
 }
 .boton-buscar,
-.boton-desplegar{
+.boton-desplegar {
   background-color: var(--color-celeste-items);
   color: var(--color-blanco-fondo);
 }
+
+/* CARTAS */
+
+.contenedor-grilla {
+  padding: 50px 0;
+}
+.columna-grilla {
+  display: flex;
+  justify-content: center;
+}
+.carta {
+  display: flex;
+  flex-direction: column;
+  border: 20px solid var(--color-rojo-general);
+  margin: 10px;
+  border-radius: 1em 0em 0em 0em;
+  border-top-left-radius: 1em;
+}
+.contenedor-imagen-pokemon {
+  display: flex;
+  justify-content: center;
+  height: 200px;
+  background-color: var(--color-fondo-imagen-pokemon);
+  border: 16px solid var(--color-borde-imagen-pokemon);
+  border-bottom: 0px;
+}
+.imagen-carta {
+  object-fit: contain;
+}
+.contenedor-info-pokemon {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 12px 0;
+  background-color: var(--color-borde-imagen-pokemon);
+  color: black;
+}
+.contenedor-id-pokemon {
+  display: flex;
+  align-items: center;
+}
+.numero-identificacion-pokemon {
+  margin: 0;
+  font-size: 20px;
+}
+.contenedor-nombre-pokemon {
+  display: flex;
+  align-items: center;
+}
+.nombre-pokemon {
+  margin: 0;
+  font-size: 22px;
+  text-decoration: underline;
+}
+.contenedor-tipos-pokemon {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 35px;
+  padding-bottom: 20px;
+  background-color: var(--color-rojo-general);
+}
+.primer-tipo{
+  background-color: green;
+}
+.segundo-tipo{
+  background-color: violet;
+}
+.primer-tipo,
+.segundo-tipo{
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0;
+  width: 75px;
+}
+
+/* FOOTER */
