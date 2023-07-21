@@ -3,9 +3,6 @@
   --color-blanco-fondo: #ededed;
   --color-celeste-items: #2972b8;
 
-  --color-fondo-imagen-pokemon: #1e1e1e;
-  --color-borde-imagen-pokemon: #dfdfdf;
-
   --color-amarillo-logo: #ffcb05;
 }
 
@@ -117,6 +114,32 @@ header {
   width: 100%;
 }
 
-#oculto{
+/* CAMBIO PAGINA */
+
+.contenedor-cambio-pagina {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.contenedor-barra-progreso {
+  padding: 10px 0;
+}
+.contenedor-botones-cambio-pagina {
+  padding: 10px;
+}
+.boton-anterior,
+.boton-siguiente {
+  margin: 0 10px;
+  padding: 5px;
+  width: 86px;
+  border: 1px solid var(--color-celeste-items);
+  border-radius: 5px;
+  background-color: var(--color-celeste-items);
+  color: var(--color-blanco-fondo);
+  font-weight: 400;
+  text-align: center;
+}
+
+#oculto {
   display: none;
 }
