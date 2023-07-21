@@ -57,7 +57,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
+  margin: 10px 0;
   padding-top: 16px;
   width: 256px;
   height: 359px;
@@ -73,6 +73,7 @@ header {
 .imagen-carta {
   object-fit: contain;
   width: 100%;
+  cursor: pointer;
 }
 .contenedor-info-pokemon {
   display: flex;
