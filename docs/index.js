@@ -1,10 +1,8 @@
-// Con funciones asincrónicas
-
 async function hacerSolicitud() {
   try {
     const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon");
     const data = await respuesta.json();
-    console.log(data.results); // Imprime la información general de los primeros 20 pokémon
+    // console.log(data.results); // Imprime la información general de los primeros 20 pokémon
     gestionarAPI(data);
   } catch (error) {}
 }
@@ -21,7 +19,7 @@ async function gestionarInformacionPokemon(URL) {
   try {
     const respuesta = await fetch(URL);
     const data = await respuesta.json();
-    console.log(data); // Imprime información del pokémon correspondiente
+    // console.log(data); // Imprime información del pokémon correspondiente
     mostrarImagenPokemon(data);
     mostrarNombrePokemon(data);
     mostrarIdentificacionPokemon(data);
@@ -57,12 +55,7 @@ function mostrarTiposPokemon(dataPokemon) {
   let indicadorCartaPokemon = dataPokemon.id - 1;
   const cantidadTiposPokemon = dataPokemon.types.length;
 
-  console.log(dataPokemon.types);
-  console.log(cantidadTiposPokemon);
-
   const $contenedorTiposPokemon = document.querySelectorAll(".contenedor-tipos-pokemon")[indicadorCartaPokemon];
-  console.log($contenedorTiposPokemon);
-  console.log($contenedorTiposPokemon.children);
 
   if (cantidadTiposPokemon === 1) {
     const $primerImagenTipoPokemon = $contenedorTiposPokemon.children[0].children[0];
