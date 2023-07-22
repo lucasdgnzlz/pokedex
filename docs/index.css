@@ -156,7 +156,7 @@ header {
   background-color: var(--color-gris-desabilitado);
 }
 
-#desabilitado{
+#deshabilitado{
   background-color: var(--color-gris-desabilitado);
   border: 1px solid var(--color-gris-desabilitado);
 }
