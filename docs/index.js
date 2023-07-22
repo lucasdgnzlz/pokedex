@@ -6,7 +6,7 @@ let indicadorPagina = 1;
 async function hacerSolicitud() {
   const cantidadPokemonPorPagina = 20;
   let indicadorPokemon = indicadorPagina * cantidadPokemonPorPagina;
-  
+
   if (indicadorPagina === 1) {
     try {
       const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon");
@@ -85,18 +85,45 @@ function mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
   }
 }
 
-function activarBoton(){
-  const $botonesCambiarPagina = document.querySelectorAll (".boton-cambiar-pagina");
+function activarBoton() {
+  const $botonesCambiarPagina = document.querySelectorAll(".boton-cambiar-pagina");
 
   $botonesCambiarPagina.forEach((boton) => {
-    if(boton.id !== ""){
+    if (boton.id !== "") {
       boton.id = "";
+      boton.disabled = false;
     }
-  })
+  });
+}
+
+function desactivarBoton(botonADesactivar) {
+  botonADesactivar.id = "deshabilitado";
+  botonADesactivar.disabled = true;
+}
+
+function mostrarIndicadorPagina() {
+  const $indicadorPagina = document.querySelector(".indicador-pagina");
+  $indicadorPagina.textContent = indicadorPagina;
 }
 
 $botonSiguientePagina.addEventListener("click", () => {
   indicadorPagina++;
   hacerSolicitud();
   activarBoton();
+  mostrarIndicadorPagina();
+});
+
+$botonAnteriorPagina.addEventListener("click", () => {
+  if (indicadorPagina === 2) {
+    indicadorPagina--;
+    hacerSolicitud();
+    activarBoton();
+    mostrarIndicadorPagina();
+    desactivarBoton($botonAnteriorPagina);
+  } else {
+    indicadorPagina--;
+    hacerSolicitud();
+    activarBoton();
+    mostrarIndicadorPagina();
+  }
 });
