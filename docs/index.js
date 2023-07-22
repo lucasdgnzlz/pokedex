@@ -11,14 +11,14 @@ async function hacerSolicitud() {
     try {
       const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon");
       const data = await respuesta.json();
-      console.log(data); // Imprime la información general de los primeros 20 pokémon
+      // console.log(data); // Imprime la información general de los primeros 20 pokémon
       gestionarAPI(data);
     } catch (error) {}
   } else {
     try {
       const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${indicadorPokemon}&limit=20`);
       const data = await respuesta.json();
-      console.log(data); // Imprime la información general de los primeros 20 pokémon
+      // console.log(data); // Imprime la información general de los siguientes 20 pokémon
       gestionarAPI(data);
     } catch (error) {}
   }
