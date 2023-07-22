@@ -4,6 +4,7 @@
   --color-celeste-items: #2972b8;
 
   --color-amarillo-logo: #ffcb05;
+  --color-gris-desabilitado: #6A737B;
 }
 
 body {
@@ -140,6 +141,10 @@ header {
   text-align: center;
 }
 
+#desabilitado{
+  background-color: var(--color-gris-desabilitado);
+  border: 1px solid var(--color-gris-desabilitado);
+}
 #oculto {
   display: none;
 }
