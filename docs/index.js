@@ -1,13 +1,13 @@
 const $botonSiguientePagina = document.querySelector(".boton-siguiente-pagina");
 const $botonAnteriorPagina = document.querySelector(".boton-anterior-pagina");
 
-let indicadorPágina = 1;
+let indicadorPagina = 1;
 
 async function hacerSolicitud() {
   const cantidadPokemonPorPagina = 20;
-  let indicadorPokemon = indicadorPágina * cantidadPokemonPorPagina;
+  let indicadorPokemon = indicadorPagina * cantidadPokemonPorPagina;
   
-  if (indicadorPágina === 1) {
+  if (indicadorPagina === 1) {
     try {
       const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon");
       const data = await respuesta.json();
@@ -96,7 +96,7 @@ function activarBoton(){
 }
 
 $botonSiguientePagina.addEventListener("click", () => {
-  indicadorPágina++;
+  indicadorPagina++;
   hacerSolicitud();
   activarBoton();
 });
