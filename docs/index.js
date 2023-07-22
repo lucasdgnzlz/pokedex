@@ -81,6 +81,7 @@ function mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
 
     $primerImagenTipoPokemon.src = `../img/${dataPokemon.types["0"]["type"]["name"]}.svg`;
     $segundaImagenTipoPokemon.src = `../img/${dataPokemon.types["1"]["type"]["name"]}.svg`;
+    $segundaImagenTipoPokemon.id = "";
   }
 }
 
