@@ -1,4 +1,4 @@
-const $botonBuscarPokemonPorId = document.querySelector(".boton-buscar-pokemon")
+const $botonBuscarPokemonPorId = document.querySelector(".boton-buscar-pokemon");
 
 const $botonSiguientePagina = document.querySelector(".boton-siguiente-pagina");
 const $botonAnteriorPagina = document.querySelector(".boton-anterior-pagina");
@@ -86,6 +86,33 @@ function mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
     $segundaImagenTipoPokemon.id = "";
   }
 }
+
+function mostrarErrorValidacionBuscador(error) {
+  const $buscadorPokemon = document.querySelector(".buscador-pokemon");
+  $buscadorPokemon.classList.add("is-invalid");
+  $buscadorPokemon.placeholder = error;
+  $buscadorPokemon.id = "error-validacion";
+}
+
+function eliminarErrorValidacion() {
+  const $buscadorPokemon = document.querySelector(".buscador-pokemon");
+  $buscadorPokemon.classList.remove("is-invalid");
+  $buscadorPokemon.placeholder = "Seleccione un Pokémon!";
+  $buscadorPokemon.id = "";
+}
+
+$botonBuscarPokemonPorId.addEventListener("click", () => {
+  const idPokemonABuscar = document.querySelector(".buscador-pokemon").value;
+
+  let error = validarIdPokemon(idPokemonABuscar);
+
+  if (error !== "") {
+    mostrarErrorValidacionBuscador(error);
+  } else {
+    console.log("ta bien");
+    eliminarErrorValidacion();
+  }
+});
 
 function activarBoton() {
   const $botonesCambiarPagina = document.querySelectorAll(".boton-cambiar-pagina");
