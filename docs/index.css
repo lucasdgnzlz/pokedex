@@ -36,8 +36,7 @@ header {
   margin: 20px 0;
   margin-top: 0;
 }
-.boton-buscar,
-.boton-desplegar {
+.boton-buscar-pokemon {
   background-color: var(--color-celeste-items);
   color: var(--color-blanco-fondo);
 }
