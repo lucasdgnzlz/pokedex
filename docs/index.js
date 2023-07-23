@@ -1,3 +1,5 @@
+const $botonBuscarPokemonPorId = document.querySelector(".boton-buscar-pokemon")
+
 const $botonSiguientePagina = document.querySelector(".boton-siguiente-pagina");
 const $botonAnteriorPagina = document.querySelector(".boton-anterior-pagina");
 
