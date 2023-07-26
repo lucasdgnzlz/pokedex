@@ -9,6 +9,7 @@
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"
     ></script>
+    <link href="https://unpkg.com/pattern.css" rel="stylesheet" />
     <link rel="stylesheet" href="index.css" />
     <link rel="shortcut icon" href="../img/logo-pokeball.png" />
     <title>Pokédex</title>
@@ -33,11 +34,11 @@
 
     <main>
       <div class="row contenedor-estructura-main">
-        <div class="col-1"></div>
+        <div class="col-1 pattern-diagonal-stripes-lg columna-decoracion"></div>
 
         <div class="col columna-contenido">
-          <div class="container text-center">
-            <div class="row contenedor-grilla">
+          <div class="container contenedor-grilla text-center">
+            <div class="row">
               <div class="col columna-grilla">
                 <div class="carta">
                   <div class="contenedor-imagen-pokemon">
@@ -533,9 +534,68 @@
               <button class="boton-cambiar-pagina boton-siguiente-pagina" id="">Siguiente</button>
             </div>
           </div>
+
+          <div class="carta-respuesta" id="oculto">
+            <div class="contenedor-boton-cerrar-detalles">
+              <button type="button" class="boton-cerrar-detalles btn-close" aria-label="Close"></button>
+            </div>
+            
+            <div class="contenedor-pokemon-elegido">
+              <div class="contenedor-principal-info">
+                <div class="contenedor-nombre-poke-elegido">
+                  <h5 class="nombre-pokemon-elegido"></h5>
+                </div>
+
+                <div class="contenedor-id-pokemon-elegido">
+                  <h5 class="id-pokemon-elegido"></h5>
+                </div>
+              </div>
+
+              <div class="contenedor-imagen-pokemon">
+                <img src="" class="imagen-pokemon-elegido imagen-carta" alt="" />
+              </div>
+
+              <div class="contenedor-tipos-pokemon-elegido">
+                <div class="contenedor-tipo">
+                  <img src="" class="primer-tipo-pokemon-elegido imagen-tipos" />
+                </div>
+
+                <div class="contenedor-tipo">
+                  <img src="" class="segundo-tipo-pokemon-elegido imagen-tipos" />
+                </div>
+              </div>
+
+              <div class="informacion-stats">
+                <div class="contenedor-titulo-stats">
+                  <h4 class="titulo-stats">Stats base</h4>
+                  <hr />
+                </div>
+
+                <div class="contenedor-stats">
+                  <ul class="lista-stats">
+                    <li class="vida-base item-lista">Vida:</li>
+                    <li class="ataque-base item-lista">Ataque:</li>
+                    <li class="defensa-base item-lista">Defensa:</li>
+                    <li class="ataque-base item-lista">Ataque Especial:</li>
+                    <li class="defensa-base item-lista">Defensa Especial:</li>
+                    <li class="velocidad-base item-lista">Velocidad:</li>
+                  </ul>
+
+                  <ul class="lista-respuestas-stats">
+                    <li class="vida-base-respuesta item-lista"></li>
+                    <li class="ataque-base-respuesta item-lista"></li>
+                    <li class="defensa-base-respuesta item-lista"></li>
+                    <li class="ataque-especial-base-respuesta item-lista"></li>
+                    <li class="defensa-especial-base-respuesta item-lista"></li>
+                    <li class="velocidad-base-respuesta item-lista"></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="col-1"></div>
+        <div class="col-1 pattern-diagonal-stripes-lg columna-decoracion"></div>
       </div>
     </main>
 

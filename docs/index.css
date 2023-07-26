@@ -4,7 +4,7 @@
   --color-celeste-items: #2972b8;
 
   --color-amarillo-logo: #ffcb05;
-  --color-gris-desabilitado: #6A737B;
+  --color-gris-desabilitado: #6a737b;
 }
 
 body {
@@ -35,6 +35,7 @@ header {
 .contenedor-buscador {
   margin: 20px 0;
   margin-top: 0;
+  width: 302px;
 }
 .boton-buscar-pokemon {
   background-color: var(--color-celeste-items);
@@ -50,6 +51,10 @@ header {
   display: flex;
   justify-content: center;
 }
+.columna-decoracion {
+  color: gray;
+  filter: opacity(0.1);
+}
 .carta {
   display: flex;
   flex-direction: column;
@@ -63,6 +68,7 @@ header {
   display: flex;
   justify-content: center;
   width: 87%;
+  max-width: 500px;
   height: 165px;
   padding: 14px;
   padding-bottom: 0px;
@@ -70,6 +76,7 @@ header {
 .imagen-carta {
   object-fit: contain;
   width: 100%;
+  max-width: 150px;
   cursor: pointer;
 }
 .contenedor-info-pokemon {
@@ -122,18 +129,18 @@ header {
   align-items: center;
   margin-bottom: 30px;
 }
-.indicador-pagina{
+.indicador-pagina {
   margin: 0 20px;
 }
 .contenedor-boton-anterior,
 .contenedor-boton-siguiente,
-.contenedor-indicador-pagina{
+.contenedor-indicador-pagina {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50px;
 }
-.contenedor-indicador-pagina{
+.contenedor-indicador-pagina {
   width: 70px;
 }
 .boton-anterior-pagina,
@@ -150,14 +157,94 @@ header {
   text-align: center;
 }
 .boton-anterior-pagina:hover,
-.boton-siguiente-pagina:hover{
+.boton-siguiente-pagina:hover {
   transition: background-color 0.1s linear;
   background-color: var(--color-gris-desabilitado);
 }
 
-#deshabilitado{
+/* CARTA RESPUESTA */
+
+.carta-respuesta{
+  margin: 40px 0;
+  border: 1px solid rgba(211, 211, 211, 0.463);
+  border-radius: 7px;
+}
+.contenedor-boton-cerrar-detalles{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.boton-cerrar-detalles{
+  margin: 10px;
+  margin-bottom: 0;
+}
+.contenedor-pokemon-elegido{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.contenedor-principal-info{
+  display: flex;
+  flex-direction: row;
+}
+.contenedor-nombre-poke-elegido,
+.contenedor-id-pokemon-elegido{
+  margin: 10px 20px;
+}
+.nombre-pokemon-elegido,
+.id-pokemon-elegido{
+  margin: 0;
+  font-size: 25px;
+  font-family: sans-serif;
+  font-weight: 600;
+}
+.imagen-carta-pokemon-elegido{
+  object-fit: contain;
+  width: 100%;
+  cursor: pointer;
+}
+.contenedor-tipos-pokemon-elegido{
+  display: flex;
+  justify-content: space-evenly;
+  width: 65%;
+  max-width: 400px;
+  height: 105px;
+  padding: 35px 0;
+}
+
+/* STATS */
+
+.contenedor-titulo-stats{
+  margin: 20px 0;
+}
+.titulo-stats{
+  text-align: center;
+}
+.contenedor-stats{
+  display: flex;
+}
+.lista-respuestas-stats,
+.lista-stats{
+  margin: 0 30px;
+  list-style: none;
+}
+.lista-stats{
+  padding-left: 0;
+}
+.lista-respuestas-stats{
+  padding-left: 0;
+}
+.item-lista{
+  margin: 10px 0;
+}
+
+#deshabilitado {
   background-color: var(--color-gris-desabilitado);
   border: 1px solid var(--color-gris-desabilitado);
+}
+#error-validacion::placeholder {
+  color: var(--color-rojo-general);
 }
 #oculto {
   display: none;
