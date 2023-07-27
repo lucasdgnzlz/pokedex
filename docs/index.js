@@ -241,7 +241,7 @@ function desactivarBoton(botonADesactivar) {
 
 function mostrarIndicadorPagina() {
   const $indicadorPagina = document.querySelector(".indicador-pagina");
-  $indicadorPagina.textContent = indicadorPagina;
+  $indicadorPagina.textContent = indicadorPagina + 1;
 }
 
 $botonSiguientePagina.addEventListener("click", () => {
