@@ -74,7 +74,7 @@ function mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
 
   if (cantidadTiposPokemon === 1) {
     const $primerImagenTipoPokemon = $contenedorTiposPokemon.children[0].children[0];
-    $primerImagenTipoPokemon.src = `../img/${dataPokemon.types["0"]["type"]["name"]}.svg`;
+    $primerImagenTipoPokemon.src = `img/${dataPokemon.types["0"]["type"]["name"]}.svg`;
 
     const $segundaImagenTipoPokemon = $contenedorTiposPokemon.children[1].children[0];
     $segundaImagenTipoPokemon.id = "oculto";
@@ -82,8 +82,8 @@ function mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
     const $primerImagenTipoPokemon = $contenedorTiposPokemon.children[0].children[0];
     const $segundaImagenTipoPokemon = $contenedorTiposPokemon.children[1].children[0];
 
-    $primerImagenTipoPokemon.src = `../img/${dataPokemon.types["0"]["type"]["name"]}.svg`;
-    $segundaImagenTipoPokemon.src = `../img/${dataPokemon.types["1"]["type"]["name"]}.svg`;
+    $primerImagenTipoPokemon.src = `img/${dataPokemon.types["0"]["type"]["name"]}.svg`;
+    $segundaImagenTipoPokemon.src = `img/${dataPokemon.types["1"]["type"]["name"]}.svg`;
     $segundaImagenTipoPokemon.id = "";
   }
 }
@@ -125,7 +125,7 @@ function mostrarTiposPokemonElegido(dataPokemon) {
 
   if (cantidadTiposPokemon === 1) {
     const $primerImagenTipoPokemon = document.querySelector(".primer-tipo-pokemon-elegido");
-    $primerImagenTipoPokemon.src = `../img/${dataPokemon.types["0"]["type"]["name"]}.svg`;
+    $primerImagenTipoPokemon.src = `img/${dataPokemon.types["0"]["type"]["name"]}.svg`;
 
     const $segundaImagenTipoPokemon = document.querySelector(".segundo-tipo-pokemon-elegido");
     $segundaImagenTipoPokemon.id = "oculto";
@@ -133,8 +133,8 @@ function mostrarTiposPokemonElegido(dataPokemon) {
     const $primerImagenTipoPokemon = document.querySelector(".primer-tipo-pokemon-elegido");
     const $segundaImagenTipoPokemon = document.querySelector(".segundo-tipo-pokemon-elegido");
 
-    $primerImagenTipoPokemon.src = `../img/${dataPokemon.types["0"]["type"]["name"]}.svg`;
-    $segundaImagenTipoPokemon.src = `../img/${dataPokemon.types["1"]["type"]["name"]}.svg`;
+    $primerImagenTipoPokemon.src = `img/${dataPokemon.types["0"]["type"]["name"]}.svg`;
+    $segundaImagenTipoPokemon.src = `img/${dataPokemon.types["1"]["type"]["name"]}.svg`;
     $segundaImagenTipoPokemon.id = "";
   }
 }
