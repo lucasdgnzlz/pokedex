@@ -14,14 +14,12 @@ async function hacerSolicitud() {
     try {
       const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon");
       const data = await respuesta.json();
-      // console.log(data); // Imprime la información general de los primeros 20 pokémon
       gestionarAPI(data);
     } catch (error) {}
   } else {
     try {
       const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${indicadorPokemon}&limit=20`);
       const data = await respuesta.json();
-      // console.log(data); // Imprime la información general de los siguientes 20 pokémon
       gestionarAPI(data);
     } catch (error) {}
   }
@@ -40,7 +38,6 @@ async function gestionarInformacionPokemon(URL, indicadorPosicionPokemonEnLista)
   try {
     const respuesta = await fetch(URL);
     const data = await respuesta.json();
-    // console.log(data); // Imprime información del pokémon correspondiente
     mostrarImagenPokemon(data, indicadorPosicionPokemonEnLista);
     mostrarNombrePokemon(data, indicadorPosicionPokemonEnLista);
     mostrarIdentificacionPokemon(data, indicadorPosicionPokemonEnLista);
@@ -92,7 +89,6 @@ async function buscarPokemonPorId(idPokemon) {
   try {
     const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`);
     const data = await respuesta.json();
-    console.log(data);
     mostrarCartaPokemonElegido();
     mostrarImagenPokemonElegido(data);
     mostrarIdPokemonElegido(data);
