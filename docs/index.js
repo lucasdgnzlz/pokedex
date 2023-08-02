@@ -1,5 +1,6 @@
 const $botonBuscarPokemon = document.querySelector(".boton-buscar-pokemon");
 const $botonCerrarDetallesPokemon = document.querySelector(".boton-cerrar-detalles");
+const $cartasPokemon = document.querySelectorAll(".carta");
 
 const $botonSiguientePagina = document.querySelector(".boton-siguiente-pagina");
 const $botonAnteriorPagina = document.querySelector(".boton-anterior-pagina");
@@ -51,6 +52,7 @@ function mostrarImagenPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
   const $imagenesCartasPokemon = document.querySelectorAll(".imagen-carta");
   $imagenesCartasPokemon[indicadorPosicionPokemonEnLista].src = dataPokemon.sprites["front_default"];
   $imagenesCartasPokemon[indicadorPosicionPokemonEnLista].alt = `Pokémon ${dataPokemon.name}`;
+  $imagenesCartasPokemon[indicadorPosicionPokemonEnLista].id = `${dataPokemon.name}`;
 }
 
 function mostrarNombrePokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
@@ -264,4 +266,13 @@ $botonAnteriorPagina.addEventListener("click", () => {
     activarBoton();
     mostrarIndicadorPagina();
   }
+});
+
+$cartasPokemon.forEach(($carta) => {
+  $carta.addEventListener("click", (e) => {
+    let idPokemonClickeado = e.target.id;
+    buscarPokemonPorId(idPokemonClickeado);
+    esconderGrilla();
+    esconderCambioPagina();
+  });
 });
