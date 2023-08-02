@@ -270,9 +270,13 @@ $botonAnteriorPagina.addEventListener("click", () => {
 
 $cartasPokemon.forEach(($carta) => {
   $carta.addEventListener("click", (e) => {
-    let idPokemonClickeado = e.target.id;
-    buscarPokemonPorId(idPokemonClickeado);
-    esconderGrilla();
-    esconderCambioPagina();
+    let elementoClickeado = e.target.className;
+
+    if (elementoClickeado === "imagen-carta") {
+      let idPokemonClickeado = e.target.id;
+      buscarPokemonPorId(idPokemonClickeado);
+      esconderGrilla();
+      esconderCambioPagina();
+    }
   });
 });
