@@ -199,7 +199,7 @@ header {
   font-family: sans-serif;
   font-weight: 600;
 }
-.imagen-carta-pokemon-elegido{
+.imagen-pokemon-elegido{
   object-fit: contain;
   width: 100%;
   cursor: pointer;
