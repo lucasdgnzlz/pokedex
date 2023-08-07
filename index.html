@@ -529,15 +529,23 @@
           </div>
 
           <div class="contenedor-cambio-pagina">
-            <div class="contenedor-boton-anterior">
-              <button class="boton-cambiar-pagina boton-anterior-pagina" id="deshabilitado" disabled>Anterior</button>
-            </div>
-            <div class="contenedor-indicador-pagina">
-              <h3 class="indicador-pagina">1</h3>
-            </div>
-            <div class="contenedor-boton-siguiente">
-              <button class="boton-cambiar-pagina boton-siguiente-pagina" id="">Siguiente</button>
-            </div>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link boton-anterior-pagina" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item"><a class="page-link indicador-pagina">1</a></li>
+                <li class="page-item"><a class="page-link indicador-pagina">2</a></li>
+                <li class="page-item"><a class="page-link indicador-pagina">3</a></li>
+                <li class="page-item">
+                  <a class="page-link boton-siguiente-pagina" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
 
           <div class="carta-respuesta" id="oculto">
