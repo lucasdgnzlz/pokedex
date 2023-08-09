@@ -130,7 +130,7 @@ header {
   margin-bottom: 30px;
 }
 .indicador-pagina {
-  margin: 0 20px;
+  cursor: pointer;
 }
 .contenedor-boton-anterior,
 .contenedor-boton-siguiente,
@@ -143,6 +143,7 @@ header {
 .contenedor-indicador-pagina {
   width: 70px;
 }
+/*
 .boton-anterior-pagina,
 .boton-siguiente-pagina {
   margin: 0 10px;
@@ -161,6 +162,7 @@ header {
   transition: background-color 0.1s linear;
   background-color: var(--color-gris-desabilitado);
 }
+*/
 
 /* CARTA RESPUESTA */
 

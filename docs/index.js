@@ -2,27 +2,18 @@ const $botonBuscarPokemon = document.querySelector(".boton-buscar-pokemon");
 const $botonCerrarDetallesPokemon = document.querySelector(".boton-cerrar-detalles");
 const $cartasPokemon = document.querySelectorAll(".carta");
 
-const $botonSiguientePagina = document.querySelector(".boton-siguiente-pagina");
-const $botonAnteriorPagina = document.querySelector(".boton-anterior-pagina");
-
 let indicadorPagina = 0;
 
 async function hacerSolicitud() {
   const cantidadPokemonPorPagina = 20;
   let indicadorPokemon = indicadorPagina * cantidadPokemonPorPagina;
 
-  if (indicadorPagina === 0) {
-    try {
-      const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon");
-      const data = await respuesta.json();
-      gestionarAPI(data);
-    } catch (error) {}
-  } else {
-    try {
-      const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${indicadorPokemon}&limit=20`);
-      const data = await respuesta.json();
-      gestionarAPI(data);
-    } catch (error) {}
+  try {
+    const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${indicadorPokemon}&limit=20`);
+    const data = await respuesta.json();
+    gestionarAPI(data);
+  } catch (error) {
+    console.error(error);
   }
 }
 hacerSolicitud();
@@ -223,49 +214,6 @@ $botonCerrarDetallesPokemon.addEventListener("click", () => {
   ocultarCartaPokemonElegido();
   mostrarGrilla();
   mostrarCambioPagina();
-});
-
-function activarBoton() {
-  const $botonesCambiarPagina = document.querySelectorAll(".boton-cambiar-pagina");
-
-  $botonesCambiarPagina.forEach((boton) => {
-    if (boton.id !== "") {
-      boton.id = "";
-      boton.disabled = false;
-    }
-  });
-}
-
-function desactivarBoton(botonADesactivar) {
-  botonADesactivar.id = "deshabilitado";
-  botonADesactivar.disabled = true;
-}
-
-function mostrarIndicadorPagina() {
-  const $indicadorPagina = document.querySelector(".indicador-pagina");
-  $indicadorPagina.textContent = indicadorPagina + 1;
-}
-
-$botonSiguientePagina.addEventListener("click", () => {
-  indicadorPagina++;
-  hacerSolicitud();
-  activarBoton();
-  mostrarIndicadorPagina();
-});
-
-$botonAnteriorPagina.addEventListener("click", () => {
-  if (indicadorPagina === 1) {
-    indicadorPagina--;
-    hacerSolicitud();
-    activarBoton();
-    mostrarIndicadorPagina();
-    desactivarBoton($botonAnteriorPagina);
-  } else {
-    indicadorPagina--;
-    hacerSolicitud();
-    activarBoton();
-    mostrarIndicadorPagina();
-  }
 });
 
 $cartasPokemon.forEach(($carta) => {
