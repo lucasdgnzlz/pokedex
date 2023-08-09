@@ -132,37 +132,6 @@ header {
 .indicador-pagina {
   cursor: pointer;
 }
-.contenedor-boton-anterior,
-.contenedor-boton-siguiente,
-.contenedor-indicador-pagina {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-}
-.contenedor-indicador-pagina {
-  width: 70px;
-}
-/*
-.boton-anterior-pagina,
-.boton-siguiente-pagina {
-  margin: 0 10px;
-  padding: 5px;
-  width: 86px;
-  height: 36.5px;
-  border: 1px solid var(--color-celeste-items);
-  border-radius: 5px;
-  background-color: var(--color-celeste-items);
-  color: var(--color-blanco-fondo);
-  font-weight: 400;
-  text-align: center;
-}
-.boton-anterior-pagina:hover,
-.boton-siguiente-pagina:hover {
-  transition: background-color 0.1s linear;
-  background-color: var(--color-gris-desabilitado);
-}
-*/
 
 /* CARTA RESPUESTA */
 
