@@ -32,6 +32,20 @@ context("Pokédex", () => {
         cy.wrap($nombrePokemon).should("be.visible");
       });
       cy.get(".nombre-pokemon").should("have.length", 20);
+
+      cy.get(".primer-tipo").each(($primerTipoPokemon) => {
+        cy.wrap($primerTipoPokemon).should("be.visible");
+      });
+      cy.get(".primer-tipo").should("have.length", 20);
+
+      cy.get(".segundo-tipo").should("have.length", 20);
+    });
+
+    it("Comprueba visibilidad de los botones de cambio de página", () => {
+      cy.get(".contenedor-cambio-pagina").should("be.visible");
+
+      cy.get(".boton-anterior-pagina").should("be.visible");
+      cy.get(".boton-siguiente-pagina").should("be.visible");
     });
   });
 });
