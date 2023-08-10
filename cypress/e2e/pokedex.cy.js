@@ -46,6 +46,10 @@ context("Pokédex", () => {
 
       cy.get(".boton-anterior-pagina").should("be.visible");
       cy.get(".boton-siguiente-pagina").should("be.visible");
+
+      cy.get(".indicador-pagina").each(($indicadorPagina) => {
+        cy.wrap($indicadorPagina).should("be.visible");
+      });
     });
   });
 });
