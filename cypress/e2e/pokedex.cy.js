@@ -52,4 +52,61 @@ context("Pokédex", () => {
       });
     });
   });
+
+  describe.only("Verifica funcionamiento del buscador", () => {
+    it("Comprueba que se muestre error en el input", () => {
+      cy.get(".buscador-pokemon").should("be.visible");
+      cy.get(".buscador-pokemon").should("have.attr", "placeholder", "Seleccione un Pokémon!");
+      cy.get(".buscador-pokemon").should("have.value", "");
+
+      cy.get(".boton-buscar-pokemon").should("be.visible").click();
+
+      cy.get(".buscador-pokemon").should("have.attr", "placeholder", "Solo acepto números!");
+      cy.get(".buscador-pokemon").should("have.attr", "id", "error-validacion");
+    });
+
+    it("Realiza búsqueda exitosa de un Pokémon específico", () => {
+      cy.get(".contenedor-grilla").should("be.visible");
+      cy.get(".contenedor-cambio-pagina").should("be.visible");
+      cy.get(".contenedor-pokemon-elegido").should("not.visible");
+
+      cy.get(".buscador-pokemon").should("be.visible").type("22");
+      cy.get(".boton-buscar-pokemon").should("be.visible").click();
+
+      cy.get(".contenedor-grilla").should("not.visible");
+      cy.get(".contenedor-cambio-pagina").should("not.visible");
+      cy.get(".contenedor-pokemon-elegido").should("be.visible");
+
+      cy.get(".nombre-pokemon-elegido").should("be.visible");
+      cy.get(".nombre-pokemon-elegido").should("text", "fearow");
+      cy.get(".id-pokemon-elegido").should("be.visible");
+      cy.get(".id-pokemon-elegido").should("text", "# 22");
+      cy.get(".imagen-pokemon-elegido").should("be.visible");
+
+      cy.get(".primer-tipo-pokemon-elegido").should("be.visible");
+      cy.get(".segundo-tipo-pokemon-elegido").should("be.visible");
+
+      cy.get(".informacion-stats").should("be.visible");
+    });
+
+    it("Cierra ventana detallada del Pokémon buscado", () => {
+      cy.get(".contenedor-grilla").should("be.visible");
+      cy.get(".contenedor-cambio-pagina").should("be.visible");
+      cy.get(".contenedor-pokemon-elegido").should("not.visible");
+
+      cy.get(".buscador-pokemon").should("be.visible").type("22");
+      cy.get(".boton-buscar-pokemon").should("be.visible").click();
+
+      cy.get(".contenedor-grilla").should("not.visible");
+      cy.get(".contenedor-cambio-pagina").should("not.visible");
+      cy.get(".contenedor-pokemon-elegido").should("be.visible");
+
+      cy.get(".contenedor-pokemon-elegido").should("be.visible");
+      cy.get(".boton-cerrar-detalles").should("be.visible").click();
+
+      cy.get(".contenedor-grilla").should("be.visible");
+      cy.get(".contenedor-cambio-pagina").should("be.visible");
+      cy.get(".contenedor-pokemon-elegido").should("not.visible");
+    });
+  });
 });
