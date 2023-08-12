@@ -53,7 +53,7 @@ context("Pokédex", () => {
     });
   });
 
-  describe.only("Verifica funcionamiento del buscador", () => {
+  describe("Verifica funcionamiento del buscador", () => {
     it("Comprueba que se muestre error en el input", () => {
       cy.get(".buscador-pokemon").should("be.visible");
       cy.get(".buscador-pokemon").should("have.attr", "placeholder", "Seleccione un Pokémon!");
@@ -107,6 +107,21 @@ context("Pokédex", () => {
       cy.get(".contenedor-grilla").should("be.visible");
       cy.get(".contenedor-cambio-pagina").should("be.visible");
       cy.get(".contenedor-pokemon-elegido").should("not.visible");
+    });
+  });
+
+  describe("Comprueba el abrir detalles Pokémon con click en la foto", () => {
+    it("Abre los detalles Pokémon con click en la imagen", () => {
+      const pokemonABuscar = "kakuna";
+      cy.wait(1000);
+
+      cy.get(".contenedor-grilla").should("be.visible");
+      cy.get(".carta-respuesta").should("not.visible");
+
+      cy.get(`#${pokemonABuscar}`).should("be.visible").click();
+      cy.get(".carta-respuesta").should("be.visible");
+      cy.get(".nombre-pokemon-elegido").should("be.visible");
+      cy.get(".nombre-pokemon-elegido").should("have.text", "kakuna");
     });
   });
 });
