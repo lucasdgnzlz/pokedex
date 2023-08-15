@@ -46,6 +46,112 @@ context("Pokédex", () => {
 
       cy.get(".boton-anterior-pagina").should("be.visible");
       cy.get(".boton-siguiente-pagina").should("be.visible");
+
+      cy.get(".indicador-pagina").each(($indicadorPagina) => {
+        cy.wrap($indicadorPagina).should("be.visible");
+      });
+    });
+  });
+
+  describe("Verifica funcionamiento del buscador", () => {
+    it("Comprueba que se muestre error en el input", () => {
+      cy.get(".buscador-pokemon").should("be.visible");
+      cy.get(".buscador-pokemon").should("have.attr", "placeholder", "Seleccione un Pokémon!");
+      cy.get(".buscador-pokemon").should("have.value", "");
+
+      cy.get(".boton-buscar-pokemon").should("be.visible").click();
+
+      cy.get(".buscador-pokemon").should("have.attr", "placeholder", "Solo acepto números!");
+      cy.get(".buscador-pokemon").should("have.attr", "id", "error-validacion");
+    });
+
+    it("Realiza búsqueda exitosa de un Pokémon específico", () => {
+      cy.get(".contenedor-grilla").should("be.visible");
+      cy.get(".contenedor-cambio-pagina").should("be.visible");
+      cy.get(".contenedor-pokemon-elegido").should("not.visible");
+
+      cy.get(".buscador-pokemon").should("be.visible").type("22");
+      cy.get(".boton-buscar-pokemon").should("be.visible").click();
+
+      cy.get(".contenedor-grilla").should("not.visible");
+      cy.get(".contenedor-cambio-pagina").should("not.visible");
+      cy.get(".contenedor-pokemon-elegido").should("be.visible");
+
+      cy.get(".nombre-pokemon-elegido").should("be.visible");
+      cy.get(".nombre-pokemon-elegido").should("text", "fearow");
+      cy.get(".id-pokemon-elegido").should("be.visible");
+      cy.get(".id-pokemon-elegido").should("text", "# 22");
+      cy.get(".imagen-pokemon-elegido").should("be.visible");
+
+      cy.get(".primer-tipo-pokemon-elegido").should("be.visible");
+      cy.get(".segundo-tipo-pokemon-elegido").should("be.visible");
+
+      cy.get(".informacion-stats").should("be.visible");
+    });
+
+    it("Cierra ventana detallada del Pokémon buscado", () => {
+      cy.get(".contenedor-grilla").should("be.visible");
+      cy.get(".contenedor-cambio-pagina").should("be.visible");
+      cy.get(".contenedor-pokemon-elegido").should("not.visible");
+
+      cy.get(".buscador-pokemon").should("be.visible").type("22");
+      cy.get(".boton-buscar-pokemon").should("be.visible").click();
+
+      cy.get(".contenedor-grilla").should("not.visible");
+      cy.get(".contenedor-cambio-pagina").should("not.visible");
+      cy.get(".contenedor-pokemon-elegido").should("be.visible");
+
+      cy.get(".contenedor-pokemon-elegido").should("be.visible");
+      cy.get(".boton-cerrar-detalles").should("be.visible").click();
+
+      cy.get(".contenedor-grilla").should("be.visible");
+      cy.get(".contenedor-cambio-pagina").should("be.visible");
+      cy.get(".contenedor-pokemon-elegido").should("not.visible");
+    });
+  });
+
+  describe("Comprueba el abrir detalles Pokémon con click en la foto", () => {
+    it("Abre los detalles Pokémon con click en la imagen", () => {
+      const pokemonABuscar = "kakuna";
+      cy.wait(1000);
+
+      cy.get(".contenedor-grilla").should("be.visible");
+      cy.get(".carta-respuesta").should("not.visible");
+
+      cy.get(`#${pokemonABuscar}`).should("be.visible").click();
+      cy.get(".carta-respuesta").should("be.visible");
+      cy.get(".nombre-pokemon-elegido").should("be.visible");
+      cy.get(".nombre-pokemon-elegido").should("have.text", "kakuna");
+    });
+  });
+
+  describe("Verifica correcto funcionamiento del cambio de página", () => {
+    it("Comprueba que al inicio esté deshabilitado el botón anterior página", () => {
+      cy.get(".indicador-estado-anterior").should("have.class", "disabled");
+      cy.get(".active").should("be.visible");
+      cy.get(".active").should("have.text", "1");
+    });
+
+    it("Comprueba cambiar a siguiente página", () => {
+      cy.wait(1500);
+      cy.get("#bulbasaur").should("exist");
+      cy.get(".boton-siguiente-pagina").should("be.visible").click();
+      cy.get("#bulbasaur").should("not.exist");
+      cy.get("#vulpix").should("exist");
+    });
+
+    it("Comprueba que se actualice el número indicador de la página actual", () => {
+      cy.get(".active").should("be.visible");
+      cy.get(".active").should("have.text", "1");
+      cy.get(".boton-siguiente-pagina").should("be.visible").click();
+      cy.get(".active").should("be.visible");
+      cy.get(".active").should("have.text", "2");
+    });
+
+    it("Verifica activación del botón cambiar página anterior", () => {
+      cy.get(".indicador-estado-anterior").should("have.class", "disabled");
+      cy.get(".boton-siguiente-pagina").should("be.visible").click();
+      cy.get(".indicador-estado-anterior").should("not.have.class", "disabled").click();
     });
   });
 });
