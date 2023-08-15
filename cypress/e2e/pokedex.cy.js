@@ -124,4 +124,34 @@ context("Pokédex", () => {
       cy.get(".nombre-pokemon-elegido").should("have.text", "kakuna");
     });
   });
+
+  describe.only("Verifica correcto funcionamiento del cambio de página", () => {
+    it("Comprueba que al inicio esté deshabilitado el botón anterior página", () => {
+      cy.get(".indicador-estado-anterior").should("have.class", "disabled");
+      cy.get(".active").should("be.visible");
+      cy.get(".active").should("have.text", "1");
+    });
+
+    it("Comprueba cambiar a siguiente página", () => {
+      cy.wait(1500);
+      cy.get("#bulbasaur").should("exist");
+      cy.get(".boton-siguiente-pagina").should("be.visible").click();
+      cy.get("#bulbasaur").should("not.exist");
+      cy.get("#vulpix").should("exist");
+    });
+
+    it("Comprueba que se actualice el número indicador de la página actual", () => {
+      cy.get(".active").should("be.visible");
+      cy.get(".active").should("have.text", "1");
+      cy.get(".boton-siguiente-pagina").should("be.visible").click();
+      cy.get(".active").should("be.visible");
+      cy.get(".active").should("have.text", "2");
+    });
+
+    it("Verifica activación del botón cambiar página anterior", () => {
+      cy.get(".indicador-estado-anterior").should("have.class", "disabled");
+      cy.get(".boton-siguiente-pagina").should("be.visible").click();
+      cy.get(".indicador-estado-anterior").should("not.have.class", "disabled").click();
+    });
+  });
 });
