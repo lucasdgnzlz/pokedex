@@ -7,6 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "install-my-project": "npm install",
     "start": "http-server",
     "cypress:open": "cypress open",
     "test": "echo \"Error: no test specified\" && exit 1"
