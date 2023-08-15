@@ -125,7 +125,7 @@ context("Pokédex", () => {
     });
   });
 
-  describe.only("Verifica correcto funcionamiento del cambio de página", () => {
+  describe("Verifica correcto funcionamiento del cambio de página", () => {
     it("Comprueba que al inicio esté deshabilitado el botón anterior página", () => {
       cy.get(".indicador-estado-anterior").should("have.class", "disabled");
       cy.get(".active").should("be.visible");
