@@ -8,7 +8,7 @@ export async function hacerSolicitud(indicadorPokemon) {
   }
 }
 
-export async function buscarPokemonPorId(idPokemon) {
+export async function buscarPokemonEspecifico(idPokemon) {
   try {
     const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`);
     const data = await respuesta.json();

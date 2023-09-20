@@ -1,4 +1,4 @@
-import { hacerSolicitud, buscarPokemonPorId } from "./pokedex.js";
+import { hacerSolicitud, buscarPokemonEspecifico } from "./pokedex.js";
 import { validarIdPokemon } from "./validaciones.js";
 
 export async function gestionarPaginas() {
@@ -21,7 +21,7 @@ function gestionarAPI(data) {
 
 async function gestionarInformacionPokemon(nombrePokemon, indicadorPosicionPokemonEnLista) {
   try {
-    const data = await buscarPokemonPorId(nombrePokemon);
+    const data = await buscarPokemonEspecifico(nombrePokemon);
     mostrarImagenPokemon(data, indicadorPosicionPokemonEnLista);
     mostrarNombrePokemon(data, indicadorPosicionPokemonEnLista);
     mostrarIdentificacionPokemon(data, indicadorPosicionPokemonEnLista);
@@ -32,7 +32,7 @@ async function gestionarInformacionPokemon(nombrePokemon, indicadorPosicionPokem
 }
 
 export async function gestionarBusquedaPokemonEspecifica(idPokemonClickeado) {
-  const respuesta = await buscarPokemonPorId(idPokemonClickeado);
+  const respuesta = await buscarPokemonEspecifico(idPokemonClickeado);
   const data = await respuesta;
   console.log(data);
   esconderGrilla();
@@ -59,7 +59,7 @@ export async function gestionarBuscarPokemonPorId() {
   if (error !== "") {
     mostrarErrorValidacionBuscador(error);
   } else {
-    const respuesta = await buscarPokemonPorId(idPokemonABuscar);
+    const respuesta = await buscarPokemonEspecifico(idPokemonABuscar);
     const data = await respuesta;
     esconderGrilla();
     esconderCambioPagina();
