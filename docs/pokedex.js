@@ -8,16 +8,6 @@ export async function hacerSolicitud(indicadorPokemon) {
   }
 }
 
-export async function buscarPokemonEspecifico(URL) {
-  try {
-    const respuesta = await fetch(URL);
-    const data = respuesta.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 export async function buscarPokemonPorId(idPokemon) {
   try {
     const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`);

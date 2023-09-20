@@ -1,4 +1,4 @@
-import { hacerSolicitud, buscarPokemonEspecifico, buscarPokemonPorId } from "./pokedex.js";
+import { hacerSolicitud, buscarPokemonPorId } from "./pokedex.js";
 import { validarIdPokemon } from "./validaciones.js";
 
 export async function gestionarPaginas() {
@@ -13,15 +13,15 @@ export async function gestionarPaginas() {
 
 function gestionarAPI(data) {
   for (let i = 0; i < data.results.length; i++) {
-    let urlPokemonABuscar = data.results[i]["url"];
+    let nombrePokemonABuscar = data.results[i]["name"];
     let indicadorPosicionPokemonEnLista = i;
-    gestionarInformacionPokemon(urlPokemonABuscar, indicadorPosicionPokemonEnLista);
+    gestionarInformacionPokemon(nombrePokemonABuscar, indicadorPosicionPokemonEnLista);
   }
 }
 
-async function gestionarInformacionPokemon(URL, indicadorPosicionPokemonEnLista) {
+async function gestionarInformacionPokemon(nombrePokemon, indicadorPosicionPokemonEnLista) {
   try {
-    const data = await buscarPokemonEspecifico(URL);
+    const data = await buscarPokemonPorId(nombrePokemon);
     mostrarImagenPokemon(data, indicadorPosicionPokemonEnLista);
     mostrarNombrePokemon(data, indicadorPosicionPokemonEnLista);
     mostrarIdentificacionPokemon(data, indicadorPosicionPokemonEnLista);
