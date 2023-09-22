@@ -129,7 +129,9 @@ header {
   align-items: center;
   margin-bottom: 30px;
 }
-.indicador-pagina {
+.indicador-pagina,
+.boton-siguiente-pagina,
+.boton-anterior-pagina {
   cursor: pointer;
 }
 
