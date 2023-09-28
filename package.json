@@ -9,6 +9,7 @@
   "scripts": {
     "start-server": "http-server",
     "cypress:open": "cypress open",
+    "start-tests": "run-p start-server cypress:open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
