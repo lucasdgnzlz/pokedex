@@ -1,11 +1,11 @@
 import {
-  gestionarPaginas,
-  gestionarActualizacionPagina,
-  gestionarCambioPaginaSiguiente,
-  gestionarCambioPaginaAnterior,
-  gestionarBuscarPokemonPorId,
-  gestionarBusquedaPokemonEspecifica,
-  gestionarCierreDetallesPokemon,
+	gestionarPaginas,
+	gestionarActualizacionPagina,
+	gestionarCambioPaginaSiguiente,
+	gestionarCambioPaginaAnterior,
+	gestionarBuscarPokemonPorId,
+	gestionarBusquedaPokemonEspecifica,
+	gestionarCierreDetallesPokemon,
 } from "./ui.js";
 
 const $botonBuscarPokemon = document.querySelector(".boton-buscar-pokemon");
@@ -17,37 +17,37 @@ const $cartasPokemon = document.querySelectorAll(".carta");
 const $botonCerrarDetallesPokemon = document.querySelector(".boton-cerrar-detalles");
 
 function iniciarPagina() {
-  gestionarPaginas();
+	gestionarPaginas();
 }
 iniciarPagina();
 
 $botonBuscarPokemon.addEventListener("click", () => {
-  gestionarBuscarPokemonPorId();
+	gestionarBuscarPokemonPorId();
 });
 
 $cartasPokemon.forEach(($carta) => {
-  $carta.addEventListener("click", (e) => {
-    let elementoClickeado = e.target.className;
+	$carta.addEventListener("click", (e) => {
+		let elementoClickeado = e.target.className;
 
-    if (elementoClickeado === "imagen-carta") {
-      let idPokemonClickeado = e.target.id;
-      gestionarBusquedaPokemonEspecifica(idPokemonClickeado);
-    }
-  });
+		if (elementoClickeado === "imagen-carta") {
+			let idPokemonClickeado = e.target.id;
+			gestionarBusquedaPokemonEspecifica(idPokemonClickeado);
+		}
+	});
 });
 
 $botonCerrarDetallesPokemon.addEventListener("click", gestionarCierreDetallesPokemon);
 
 $indicadoresPagina.forEach(($indicador) => {
-  $indicador.addEventListener("click", () => {
-    gestionarActualizacionPagina($indicador, $indicadoresPagina);
-  });
+	$indicador.addEventListener("click", () => {
+		gestionarActualizacionPagina($indicador, $indicadoresPagina);
+	});
 });
 
 $botonSiguientePagina.addEventListener("click", () => {
-  gestionarCambioPaginaSiguiente($indicadoresPagina);
+	gestionarCambioPaginaSiguiente($indicadoresPagina);
 });
 
 $botonAnteriorPagina.addEventListener("click", () => {
-  gestionarCambioPaginaAnterior($indicadoresPagina);
+	gestionarCambioPaginaAnterior($indicadoresPagina);
 });
