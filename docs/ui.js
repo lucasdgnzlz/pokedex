@@ -164,8 +164,7 @@ function mostrarIdentificacionPokemon(dataPokemon, indicadorPosicionPokemonEnLis
 function mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
 	const cantidadTiposPokemon = dataPokemon.types.length;
 
-	const $contenedorTiposPokemon =
-    document.querySelectorAll(".contenedor-tipos-pokemon")[indicadorPosicionPokemonEnLista];
+	const $contenedorTiposPokemon = document.querySelectorAll(".contenedor-tipos-pokemon")[indicadorPosicionPokemonEnLista];
 
 	if (cantidadTiposPokemon === 1) {
 		const $primerImagenTipoPokemon = $contenedorTiposPokemon.children[0].children[0];
