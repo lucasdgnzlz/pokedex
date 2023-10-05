@@ -7,8 +7,17 @@ export async function gestionarPaginas() {
 	const cantidadPokemonPorPagina = 20;
 	let indicadorPokemon = indicadorPagina * cantidadPokemonPorPagina;
 
-	const data = await hacerSolicitud(indicadorPokemon);
-	gestionarAPI(data);
+	ocultarPaginaPrincipal();
+	mostrarPantallaDeCarga();
+
+	try{
+		const data = await hacerSolicitud(indicadorPokemon);
+		gestionarAPI(data);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
+	} catch(e){
+		console.error(e);
+	}
 }
 
 function gestionarAPI(data) {
@@ -349,4 +358,30 @@ function activarBotonSiguientePagina() {
 function desactivarBotonSiguientePagina() {
 	const $estadoBotonAnterior = document.querySelector(".indicador-estado-siguiente");
 	$estadoBotonAnterior.classList.add("disabled");
+}
+
+function mostrarPantallaDeCarga(){
+	const $pantallaDeCarga = document.querySelector(".pantalla-de-carga");
+	$pantallaDeCarga.id = "";
+}
+
+function ocultarPantallaDeCarga(){
+	const $pantallaDeCarga = document.querySelector(".pantalla-de-carga");
+	$pantallaDeCarga.id = "oculto";
+}
+
+function mostrarPaginaPrincipal(){
+	const $estructuraPaginaPrincipal = document.querySelector(".contenedor-estructura-main");
+	$estructuraPaginaPrincipal.id = "";
+
+	const $cabecera = document.querySelector("header");
+	$cabecera.id = "";
+}
+
+function ocultarPaginaPrincipal(){
+	const $estructuraPaginaPrincipal = document.querySelector(".contenedor-estructura-main");
+	$estructuraPaginaPrincipal.id = "";
+
+	const $cabecera = document.querySelector("header");
+	$cabecera.id = "";
 }
