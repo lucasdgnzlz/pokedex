@@ -43,7 +43,6 @@ async function gestionarInformacionPokemon(nombrePokemon, indicadorPosicionPokem
 export async function gestionarBusquedaPokemonEspecifica(idPokemonClickeado) {
 	const respuesta = await buscarPokemonEspecifico(idPokemonClickeado);
 	const data = await respuesta;
-	console.log(data);
 	esconderGrilla();
 	esconderCambioPagina();
 	mostrarCartaPokemonElegido();
