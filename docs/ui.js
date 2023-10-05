@@ -64,21 +64,30 @@ export async function gestionarBuscarPokemonPorId() {
 
 	let error = validarIdPokemon(idPokemonABuscar);
 
+	ocultarPaginaPrincipal();
+	mostrarPantallaDeCarga();
+
 	if (error !== "") {
 		mostrarErrorValidacionBuscador(error);
 	} else {
-		const respuesta = await buscarPokemonEspecifico(idPokemonABuscar);
-		const data = await respuesta;
-		esconderGrilla();
-		esconderCambioPagina();
-		eliminarErrorValidacion();
-		mostrarCartaPokemonElegido();
-		mostrarImagenPokemonElegido(data);
-		mostrarIdPokemonElegido(data);
-		mostrarNombrePokemonElegido(data);
-		mostrarTiposPokemonElegido(data);
-		mostrarStatsPokemon(data);
-	}
+		try{
+			const respuesta = await buscarPokemonEspecifico(idPokemonABuscar);
+			const data = await respuesta;
+			esconderGrilla();
+			esconderCambioPagina();
+			eliminarErrorValidacion();
+			mostrarCartaPokemonElegido();
+			mostrarImagenPokemonElegido(data);
+			mostrarIdPokemonElegido(data);
+			mostrarNombrePokemonElegido(data);
+			mostrarTiposPokemonElegido(data);
+			mostrarStatsPokemon(data);
+			mostrarPaginaPrincipal();
+			ocultarPantallaDeCarga();
+		} catch(e){
+			console.error(e);
+		}
+	} 
 }
 
 export function gestionarActualizacionPagina($indicador, $indicadoresPagina) {
