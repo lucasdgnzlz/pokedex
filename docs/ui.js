@@ -7,8 +7,17 @@ export async function gestionarPaginas() {
 	const cantidadPokemonPorPagina = 20;
 	let indicadorPokemon = indicadorPagina * cantidadPokemonPorPagina;
 
-	const data = await hacerSolicitud(indicadorPokemon);
-	gestionarAPI(data);
+	ocultarPaginaPrincipal();
+	mostrarPantallaDeCarga();
+
+	try{
+		const data = await hacerSolicitud(indicadorPokemon);
+		gestionarAPI(data);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
+	} catch(e){
+		console.error(e);
+	}
 }
 
 function gestionarAPI(data) {
@@ -34,7 +43,6 @@ async function gestionarInformacionPokemon(nombrePokemon, indicadorPosicionPokem
 export async function gestionarBusquedaPokemonEspecifica(idPokemonClickeado) {
 	const respuesta = await buscarPokemonEspecifico(idPokemonClickeado);
 	const data = await respuesta;
-	console.log(data);
 	esconderGrilla();
 	esconderCambioPagina();
 	mostrarCartaPokemonElegido();
@@ -56,21 +64,30 @@ export async function gestionarBuscarPokemonPorId() {
 
 	let error = validarIdPokemon(idPokemonABuscar);
 
+	ocultarPaginaPrincipal();
+	mostrarPantallaDeCarga();
+
 	if (error !== "") {
 		mostrarErrorValidacionBuscador(error);
 	} else {
-		const respuesta = await buscarPokemonEspecifico(idPokemonABuscar);
-		const data = await respuesta;
-		esconderGrilla();
-		esconderCambioPagina();
-		eliminarErrorValidacion();
-		mostrarCartaPokemonElegido();
-		mostrarImagenPokemonElegido(data);
-		mostrarIdPokemonElegido(data);
-		mostrarNombrePokemonElegido(data);
-		mostrarTiposPokemonElegido(data);
-		mostrarStatsPokemon(data);
-	}
+		try{
+			const respuesta = await buscarPokemonEspecifico(idPokemonABuscar);
+			const data = await respuesta;
+			esconderGrilla();
+			esconderCambioPagina();
+			eliminarErrorValidacion();
+			mostrarCartaPokemonElegido();
+			mostrarImagenPokemonElegido(data);
+			mostrarIdPokemonElegido(data);
+			mostrarNombrePokemonElegido(data);
+			mostrarTiposPokemonElegido(data);
+			mostrarStatsPokemon(data);
+			mostrarPaginaPrincipal();
+			ocultarPantallaDeCarga();
+		} catch(e){
+			console.error(e);
+		}
+	} 
 }
 
 export function gestionarActualizacionPagina($indicador, $indicadoresPagina) {
@@ -349,4 +366,30 @@ function activarBotonSiguientePagina() {
 function desactivarBotonSiguientePagina() {
 	const $estadoBotonAnterior = document.querySelector(".indicador-estado-siguiente");
 	$estadoBotonAnterior.classList.add("disabled");
+}
+
+function mostrarPantallaDeCarga(){
+	const $pantallaDeCarga = document.querySelector(".pantalla-de-carga");
+	$pantallaDeCarga.id = "";
+}
+
+function ocultarPantallaDeCarga(){
+	const $pantallaDeCarga = document.querySelector(".pantalla-de-carga");
+	$pantallaDeCarga.id = "oculto";
+}
+
+function mostrarPaginaPrincipal(){
+	const $estructuraPaginaPrincipal = document.querySelector(".contenedor-estructura-main");
+	$estructuraPaginaPrincipal.id = "";
+
+	const $cabecera = document.querySelector("header");
+	$cabecera.id = "";
+}
+
+function ocultarPaginaPrincipal(){
+	const $estructuraPaginaPrincipal = document.querySelector(".contenedor-estructura-main");
+	$estructuraPaginaPrincipal.id = "";
+
+	const $cabecera = document.querySelector("header");
+	$cabecera.id = "";
 }
