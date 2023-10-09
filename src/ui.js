@@ -1,15 +1,28 @@
 import { hacerSolicitud, buscarPokemonEspecifico } from "./pokedex.js";
 import { validarIdPokemon } from "./validaciones.js";
+import { cargarPokemonesDeLocalStorage, guardarPokemonesEnLocalStorage } from "./storage/pokedex.js";
 
 export async function gestionarPaginas() {
 	const numeroPaginaActual = Number(document.querySelector(".active").textContent);
 	const indicadorPagina = numeroPaginaActual - 1;
 	const cantidadPokemonPorPagina = 20;
-	let indicadorPokemon = indicadorPagina * cantidadPokemonPorPagina;
 
 	ocultarPaginaPrincipal();
 	mostrarPantallaDeCarga();
 
+	try{
+		const pokemones = cargarPokemonesDeLocalStorage(numeroPaginaActual);
+		gestionarAPI(pokemones);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
+	} catch(e){
+		const data = await hacerSolicitud(indicadorPagina * cantidadPokemonPorPagina);
+		guardarPokemonesEnLocalStorage(numeroPaginaActual, data);
+		gestionarAPI(data);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
+	}
+	/*
 	try{
 		const data = await hacerSolicitud(indicadorPokemon);
 		gestionarAPI(data);
@@ -18,6 +31,7 @@ export async function gestionarPaginas() {
 	} catch(e){
 		console.error(e);
 	}
+	*/
 }
 
 function gestionarAPI(data) {
