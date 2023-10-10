@@ -1,6 +1,6 @@
 import { hacerSolicitud, buscarPokemonEspecifico } from "./pokedex.js";
 import { validarIdPokemon } from "./validaciones.js";
-import { cargarPokemonesDeLocalStorage, guardarPokemonesEnLocalStorage } from "./storage/pokedex.js";
+import { cargarPokemonesDeLocalStorage, guardarPokemonesEnLocalStorage, cargarDataPokemonDeLocalStorage, guardarDataPokemonEnLocalStorage } from "./storage/pokedex.js";
 
 export async function gestionarPaginas() {
 	const numeroPaginaActual = Number(document.querySelector(".active").textContent);
@@ -12,45 +12,43 @@ export async function gestionarPaginas() {
 
 	try{
 		const pokemones = cargarPokemonesDeLocalStorage(numeroPaginaActual);
-		gestionarAPI(pokemones);
+		gestionarAPI(indicadorPagina, pokemones);
 		mostrarPaginaPrincipal();
 		ocultarPantallaDeCarga();
 	} catch(e){
 		const data = await hacerSolicitud(indicadorPagina * cantidadPokemonPorPagina);
 		guardarPokemonesEnLocalStorage(numeroPaginaActual, data);
-		gestionarAPI(data);
+		gestionarAPI(indicadorPagina, data);
 		mostrarPaginaPrincipal();
 		ocultarPantallaDeCarga();
 	}
-	/*
-	try{
-		const data = await hacerSolicitud(indicadorPokemon);
-		gestionarAPI(data);
-		mostrarPaginaPrincipal();
-		ocultarPantallaDeCarga();
-	} catch(e){
-		console.error(e);
-	}
-	*/
 }
 
-function gestionarAPI(data) {
+function gestionarAPI(indicadorPagina, data) {
+	const parametroCalcularIdPokemon = indicadorPagina * 20;
+
 	for (let i = 0; i < data.results.length; i++) {
 		let nombrePokemonABuscar = data.results[i]["name"];
+		const idPokemon = (Number(Object.keys(data.results)[i]) + 1) + parametroCalcularIdPokemon;
 		let indicadorPosicionPokemonEnLista = i;
-		gestionarInformacionPokemon(nombrePokemonABuscar, indicadorPosicionPokemonEnLista);
+		gestionarInformacionPokemon(idPokemon, nombrePokemonABuscar, indicadorPosicionPokemonEnLista);
 	}
 }
 
-async function gestionarInformacionPokemon(nombrePokemon, indicadorPosicionPokemonEnLista) {
-	try {
+async function gestionarInformacionPokemon(idPokemon, nombrePokemon, indicadorPosicionPokemonEnLista) {
+	try{
+		const dataPokemon = cargarDataPokemonDeLocalStorage(idPokemon);
+		mostrarImagenPokemon(dataPokemon, indicadorPosicionPokemonEnLista);
+		mostrarNombrePokemon(dataPokemon, indicadorPosicionPokemonEnLista);
+		mostrarIdentificacionPokemon(dataPokemon, indicadorPosicionPokemonEnLista);
+		mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista);
+	} catch(e){
 		const data = await buscarPokemonEspecifico(nombrePokemon);
+		guardarDataPokemonEnLocalStorage(data);
 		mostrarImagenPokemon(data, indicadorPosicionPokemonEnLista);
 		mostrarNombrePokemon(data, indicadorPosicionPokemonEnLista);
 		mostrarIdentificacionPokemon(data, indicadorPosicionPokemonEnLista);
 		mostrarTiposPokemon(data, indicadorPosicionPokemonEnLista);
-	} catch (error) {
-		console.error(error);
 	}
 }
 
@@ -176,10 +174,17 @@ export function gestionarCambioPaginaSiguiente($indicadoresPagina) {
 }
 
 function mostrarImagenPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
-	const $imagenesCartasPokemon = document.querySelectorAll(".imagen-carta");
-	$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].src = dataPokemon.sprites["front_default"];
-	$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].alt = `Pokémon ${dataPokemon.name}`;
-	$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].id = `${dataPokemon.name}`;
+	if(typeof dataPokemon.sprites === "string"){
+		const $imagenesCartasPokemon = document.querySelectorAll(".imagen-carta");
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].src = dataPokemon.sprites;
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].alt = `Pokémon ${dataPokemon.name}`;
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].id = `${dataPokemon.name}`;
+	} else{
+		const $imagenesCartasPokemon = document.querySelectorAll(".imagen-carta");
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].src = dataPokemon.sprites["front_default"];
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].alt = `Pokémon ${dataPokemon.name}`;
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].id = `${dataPokemon.name}`;
+	}
 }
 
 function mostrarNombrePokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
