@@ -58,7 +58,6 @@ export async function gestionarBusquedaPokemonEspecifica(idPokemonClickeado) {
 
 	try{
 		const dataPokemon = cargarDataPokemonDeLocalStorage(idPokemonClickeado);
-		console.log("storage");
 		esconderGrilla();
 		esconderCambioPagina();
 		mostrarCartaPokemonElegido();
@@ -72,7 +71,6 @@ export async function gestionarBusquedaPokemonEspecifica(idPokemonClickeado) {
 	} catch(e){
 		const respuesta = await buscarPokemonEspecifico(idPokemonClickeado);
 		const data = await respuesta;
-		console.log("api");
 		esconderGrilla();
 		esconderCambioPagina();
 		mostrarCartaPokemonElegido();
