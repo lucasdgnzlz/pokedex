@@ -29,7 +29,6 @@ $cartasPokemon.forEach(($carta) => {
 	$carta.addEventListener("click", () => {
 		const textoIdPokemon = $carta.querySelector(".numero-identificacion-pokemon").textContent;
 		const idPokemon = Number(textoIdPokemon.match(/\d+/)[0]);
-		console.log(idPokemon);
 
 		if (typeof idPokemon === "number") {
 			gestionarBusquedaPokemonEspecifica(idPokemon);
