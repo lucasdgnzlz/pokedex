@@ -227,7 +227,7 @@ function mostrarNombrePokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
 
 function mostrarIdentificacionPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
 	const $numeroIdentificacionPokemon = document.querySelectorAll(".numero-identificacion-pokemon");
-	$numeroIdentificacionPokemon[indicadorPosicionPokemonEnLista].textContent = `${dataPokemon.id}`;
+	$numeroIdentificacionPokemon[indicadorPosicionPokemonEnLista].textContent = `# ${dataPokemon.id}`;
 }
 
 function mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
@@ -265,7 +265,7 @@ function mostrarImagenPokemonElegido(dataPokemon) {
 
 function mostrarIdPokemonElegido(dataPokemon) {
 	const $idPokemonElegido = document.querySelector(".id-pokemon-elegido");
-	$idPokemonElegido.textContent = `${dataPokemon.id}`;
+	$idPokemonElegido.textContent = `# ${dataPokemon.id}`;
 }
 
 function mostrarNombrePokemonElegido(dataPokemon) {
