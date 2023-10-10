@@ -53,16 +53,37 @@ async function gestionarInformacionPokemon(idPokemon, nombrePokemon, indicadorPo
 }
 
 export async function gestionarBusquedaPokemonEspecifica(idPokemonClickeado) {
-	const respuesta = await buscarPokemonEspecifico(idPokemonClickeado);
-	const data = await respuesta;
-	esconderGrilla();
-	esconderCambioPagina();
-	mostrarCartaPokemonElegido();
-	mostrarImagenPokemonElegido(data);
-	mostrarIdPokemonElegido(data);
-	mostrarNombrePokemonElegido(data);
-	mostrarTiposPokemonElegido(data);
-	mostrarStatsPokemon(data);
+	ocultarPaginaPrincipal();
+	mostrarPantallaDeCarga();
+
+	try{
+		const dataPokemon = cargarDataPokemonDeLocalStorage(idPokemonClickeado);
+		console.log("storage");
+		esconderGrilla();
+		esconderCambioPagina();
+		mostrarCartaPokemonElegido();
+		mostrarImagenPokemonElegido(dataPokemon);
+		mostrarIdPokemonElegido(dataPokemon);
+		mostrarNombrePokemonElegido(dataPokemon);
+		mostrarTiposPokemonElegido(dataPokemon);
+		mostrarStatsPokemon(dataPokemon);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
+	} catch(e){
+		const respuesta = await buscarPokemonEspecifico(idPokemonClickeado);
+		const data = await respuesta;
+		console.log("api");
+		esconderGrilla();
+		esconderCambioPagina();
+		mostrarCartaPokemonElegido();
+		mostrarImagenPokemonElegido(data);
+		mostrarIdPokemonElegido(data);
+		mostrarNombrePokemonElegido(data);
+		mostrarTiposPokemonElegido(data);
+		mostrarStatsPokemon(data);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
+	}
 }
 
 export function gestionarCierreDetallesPokemon() {
@@ -208,7 +229,7 @@ function mostrarNombrePokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
 
 function mostrarIdentificacionPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
 	const $numeroIdentificacionPokemon = document.querySelectorAll(".numero-identificacion-pokemon");
-	$numeroIdentificacionPokemon[indicadorPosicionPokemonEnLista].textContent = `# ${dataPokemon.id}`;
+	$numeroIdentificacionPokemon[indicadorPosicionPokemonEnLista].textContent = `${dataPokemon.id}`;
 }
 
 function mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
@@ -246,7 +267,7 @@ function mostrarImagenPokemonElegido(dataPokemon) {
 
 function mostrarIdPokemonElegido(dataPokemon) {
 	const $idPokemonElegido = document.querySelector(".id-pokemon-elegido");
-	$idPokemonElegido.textContent = `# ${dataPokemon.id}`;
+	$idPokemonElegido.textContent = `${dataPokemon.id}`;
 }
 
 function mostrarNombrePokemonElegido(dataPokemon) {
