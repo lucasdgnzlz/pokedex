@@ -1,4 +1,8 @@
 export function guardarPokemonesEnLocalStorage(paginaPokemon, dataPokemon){
+	if(typeof paginaPokemon !== "number" || typeof dataPokemon !== "object"){
+		throw new Error("Se necesita el número de la página a la que pertenece la data, y los pokemones para guardar en el localStorage");
+	}
+
 	localStorage.setItem(`pagina_${paginaPokemon}`, JSON.stringify(dataPokemon));
 }
 
@@ -17,6 +21,10 @@ export function cargarPokemonesDeLocalStorage(numeroPaginaActual){
 }
 
 export function guardarDataPokemonEnLocalStorage(data){
+	if(typeof data !== "object"){
+		throw new Error("Se necesita la data del pokémon para guardarla en el localStorage");
+	}
+	
 	let dataPokemon = {
 		"name": data.name,
 		"id": data.id,
