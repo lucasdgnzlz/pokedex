@@ -81,10 +81,26 @@ export async function gestionarBuscarPokemonPorId() {
 
 	if (error !== "") {
 		mostrarErrorValidacionBuscador(error);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
 	} else {
 		try{
+			const dataPokemon = cargarDataPokemonDeLocalStorage(idPokemonABuscar);
+			esconderGrilla();
+			esconderCambioPagina();
+			eliminarErrorValidacion();
+			mostrarCartaPokemonElegido();
+			mostrarImagenPokemonElegido(dataPokemon);
+			mostrarIdPokemonElegido(dataPokemon);
+			mostrarNombrePokemonElegido(dataPokemon);
+			mostrarTiposPokemonElegido(dataPokemon);
+			mostrarStatsPokemon(dataPokemon);
+			mostrarPaginaPrincipal();
+			ocultarPantallaDeCarga();
+		} catch(e){
 			const respuesta = await buscarPokemonEspecifico(idPokemonABuscar);
 			const data = await respuesta;
+			guardarDataPokemonEnLocalStorage(data);
 			esconderGrilla();
 			esconderCambioPagina();
 			eliminarErrorValidacion();
@@ -96,8 +112,6 @@ export async function gestionarBuscarPokemonPorId() {
 			mostrarStatsPokemon(data);
 			mostrarPaginaPrincipal();
 			ocultarPantallaDeCarga();
-		} catch(e){
-			console.error(e);
 		}
 	} 
 }
@@ -220,8 +234,14 @@ function mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
 
 function mostrarImagenPokemonElegido(dataPokemon) {
 	const $imagenPokemonElegido = document.querySelector(".imagen-pokemon-elegido");
-	$imagenPokemonElegido.src = dataPokemon.sprites["front_default"];
-	$imagenPokemonElegido.alt = `Pokémon ${dataPokemon.name}`;
+
+	if(typeof dataPokemon.sprites === "string"){
+		$imagenPokemonElegido.src = dataPokemon.sprites;
+		$imagenPokemonElegido.alt = `Pokémon ${dataPokemon.name}`;
+	} else{
+		$imagenPokemonElegido.src = dataPokemon.sprites["front_default"];
+		$imagenPokemonElegido.alt = `Pokémon ${dataPokemon.name}`;
+	}
 }
 
 function mostrarIdPokemonElegido(dataPokemon) {
