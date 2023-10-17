@@ -7,9 +7,6 @@ export async function gestionarPaginas() {
 	const indicadorPagina = numeroPaginaActual - 1;
 	const cantidadPokemonPorPagina = 20;
 
-	ocultarPaginaPrincipal();
-	mostrarPantallaDeCarga();
-
 	try{
 		const pokemones = cargarPokemonesDeLocalStorage(numeroPaginaActual);
 		gestionarAPI(indicadorPagina, pokemones);
