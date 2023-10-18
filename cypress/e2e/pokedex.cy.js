@@ -47,5 +47,32 @@ context("Pokédex", () => {
 				.should("have.id", "error-validacion")
 				.should("have.attr", "placeholder", "Solo acepto números!");
 		});
+
+		it("Realiza una correcta búsqueda por ID", () =>{
+			cy.get(".carta-respuesta")
+				.should("not.be.visible");
+
+			cy.get(".buscador-pokemon")
+				.should("be.visible")
+				.type("466");
+
+			cy.get(".boton-buscar-pokemon")
+				.should("be.visible")
+				.click();
+
+			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon/466", {
+				fixture: "electivire",
+			}).as("apiRequest");
+
+			cy.get(".carta-respuesta")
+				.should("be.visible")
+				.within(() => {
+					cy.get(".nombre-pokemon-elegido").should("be.visible");
+					cy.contains("electivire");
+
+					cy.get(".id-pokemon-elegido").should("be.visible");
+					cy.contains("# 466");
+				});
+		});
 	});
 });
