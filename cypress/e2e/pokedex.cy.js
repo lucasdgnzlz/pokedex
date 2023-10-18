@@ -116,9 +116,9 @@ context("Pokédex", () => {
 				fixture: "listado-pagina-1"
 			}).as("apiRequest");
 
-			cy.fixture("listado-pagina-1").then(($pokemonData) =>{
+			cy.fixture("listado-pagina-1").then((pokemonData) =>{
 				cy.get(".nombre-pokemon").each(($nombrePokemon, index) => {
-					cy.wrap($nombrePokemon).should("have.text", $pokemonData.results[index]["name"]);
+					cy.wrap($nombrePokemon).should("have.text", pokemonData.results[index]["name"]);
 				});
 			});
 
@@ -130,9 +130,55 @@ context("Pokédex", () => {
 				fixture: "listado-pagina-2"
 			}).as("apiRequest");
 
-			cy.fixture("listado-pagina-2").then(($pokemonData) =>{
+			cy.fixture("listado-pagina-2").then((pokemonData) =>{
 				cy.get(".nombre-pokemon").each(($nombrePokemon, index) =>{
+					cy.wrap($nombrePokemon).should("have.text", pokemonData.results[index]["name"]);
+				});
+			});
+		});
+
+		it.only("Prueba funcionamiento del botón anterior página", () => {
+			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20" ,{
+				fixture: "listado-pagina-1"
+			}).as("apiRequest");
+
+			cy.fixture("listado-pagina-1").then(($pokemonData) =>{
+				cy.get(".nombre-pokemon").each(($nombrePokemon, index) => {
 					cy.wrap($nombrePokemon).should("have.text", $pokemonData.results[index]["name"]);
+				});
+			});
+
+			cy.get(".indicador-estado-anterior")
+				.should("be.visible")
+				.should("have.class", "disabled");
+
+			cy.get(".boton-siguiente-pagina")
+				.should("be.visible")
+				.should("not.have.class", "disabled")
+				.click();
+
+			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20", {
+				fixture: "listado-pagina-2"
+			}).as("apiRequest");
+	
+			cy.fixture("listado-pagina-2").then((pokemonData) =>{
+				cy.get(".nombre-pokemon").each(($nombrePokemon, index) =>{
+					cy.wrap($nombrePokemon).should("have.text", pokemonData.results[index]["name"]);
+				});
+			});
+
+			cy.get(".indicador-estado-anterior")
+				.should("be.visible")
+				.should("not.have.class", "disabled")
+				.click();
+
+			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20", {
+				fixture: "listado-pagina-1"
+			});
+
+			cy.fixture("listado-pagina-1").then((pokemonData) =>{
+				cy.get(".nombre-pokemon").each(($nombrePokemon, index) =>{
+					cy.wrap($nombrePokemon).should("have.text", pokemonData.results[index]["name"]);
 				});
 			});
 		});
