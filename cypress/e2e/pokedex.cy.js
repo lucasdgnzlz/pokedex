@@ -76,7 +76,7 @@ context("Pokédex", () => {
 		});
 	});
 
-	describe.only("Comprueba funcionamiento del paginador", () => {
+	describe("Comprueba funcionamiento del paginador", () => {
 		it("Verifica funcionamiento de los números del paginador", () => {
 			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20", {
 				fixture: "listado-pagina-1"
@@ -137,7 +137,7 @@ context("Pokédex", () => {
 			});
 		});
 
-		it.only("Prueba funcionamiento del botón anterior página", () => {
+		it("Prueba funcionamiento del botón anterior página", () => {
 			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20" ,{
 				fixture: "listado-pagina-1"
 			}).as("apiRequest");
