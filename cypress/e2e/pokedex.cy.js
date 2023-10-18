@@ -33,7 +33,7 @@ context("Pokédex", () => {
 		});
 	});
 
-	describe.only("Comprueba funcionamiento de busqueda de un pokémon por ID", () => {
+	describe("Comprueba funcionamiento de busqueda de un pokémon por ID", () => {
 		it("Verifica la validación del buscador con campo de búsqueda vacío", () =>{
 			cy.get(".buscador-pokemon")
 				.should("be.visible")
@@ -73,6 +73,42 @@ context("Pokédex", () => {
 					cy.get(".id-pokemon-elegido").should("be.visible");
 					cy.contains("# 466");
 				});
+		});
+	});
+
+	describe.only("Comprueba funcionamiento del paginador", () => {
+		it("Verifica funcionamiento de los números del paginador", () => {
+			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20", {
+				fixture: "listado-pagina-1"
+			}).as("apiRequest");
+
+			cy.fixture("listado-pagina-1").then((pokemonData) => {
+				cy.get(".nombre-pokemon").each(($nombrePokemon, index) =>{
+					cy.wrap($nombrePokemon).should("have.text", pokemonData.results[index]["name"]);
+				});
+			});
+
+			cy.get(".paginador")
+				.should("be.visible")
+				.within(() => {
+					cy.contains("1");
+					cy.contains("2");
+					cy.contains("3").click();
+
+					cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=40&limit=20", {
+						fixture: "listado-pagina-3"
+					}).as("apiRequeshhhhht");
+
+					cy.contains("3");
+					cy.contains("4");
+					cy.contains("5");
+				});
+
+			cy.fixture("listado-pagina-3").then((pokemonData) => {
+				cy.get(".nombre-pokemon").each(($nombrePokemon, index) =>{
+					cy.wrap($nombrePokemon).should("have.text", pokemonData.results[index]["name"]);
+				});
+			});
 		});
 	});
 });
