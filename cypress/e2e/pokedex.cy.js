@@ -97,7 +97,7 @@ context("Pokédex", () => {
 
 					cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=40&limit=20", {
 						fixture: "listado-pagina-3"
-					}).as("apiRequeshhhhht");
+					}).as("apiRequest");
 
 					cy.contains("3");
 					cy.contains("4");
@@ -107,6 +107,32 @@ context("Pokédex", () => {
 			cy.fixture("listado-pagina-3").then((pokemonData) => {
 				cy.get(".nombre-pokemon").each(($nombrePokemon, index) =>{
 					cy.wrap($nombrePokemon).should("have.text", pokemonData.results[index]["name"]);
+				});
+			});
+		});
+
+		it("Verifica funcionamiento del botón siguiente página", () =>{
+			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20" ,{
+				fixture: "listado-pagina-1"
+			}).as("apiRequest");
+
+			cy.fixture("listado-pagina-1").then(($pokemonData) =>{
+				cy.get(".nombre-pokemon").each(($nombrePokemon, index) => {
+					cy.wrap($nombrePokemon).should("have.text", $pokemonData.results[index]["name"]);
+				});
+			});
+
+			cy.get(".boton-siguiente-pagina")
+				.should("be.visible")
+				.click();
+
+			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20", {
+				fixture: "listado-pagina-2"
+			}).as("apiRequest");
+
+			cy.fixture("listado-pagina-2").then(($pokemonData) =>{
+				cy.get(".nombre-pokemon").each(($nombrePokemon, index) =>{
+					cy.wrap($nombrePokemon).should("have.text", $pokemonData.results[index]["name"]);
 				});
 			});
 		});
