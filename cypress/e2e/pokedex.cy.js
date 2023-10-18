@@ -32,4 +32,20 @@ context("Pokédex", () => {
 			});
 		});
 	});
+
+	describe.only("Comprueba funcionamiento de busqueda de un pokémon por ID", () => {
+		it("Verifica la validación del buscador con campo de búsqueda vacío", () =>{
+			cy.get(".buscador-pokemon")
+				.should("be.visible")
+				.should("have.id", "")
+				.should("have.attr", "placeholder", "Seleccione un Pokémon!");
+				
+			cy.get(".boton-buscar-pokemon").should("be.visible").click();
+
+			cy.get(".buscador-pokemon")
+				.should("be.visible")
+				.should("have.id", "error-validacion")
+				.should("have.attr", "placeholder", "Solo acepto números!");
+		});
+	});
 });
