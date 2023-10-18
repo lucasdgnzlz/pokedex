@@ -19,5 +19,17 @@ context("Pokédex", () => {
 
 			cy.get(".pantalla-de-carga").should("not.be.visible");
 		});
+
+		it("Verifica la correcta carga de los primeros 20 pokémon", () => {
+			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20", {
+				fixture: "listado-pagina-1",
+			}).as("apiRequest");
+
+			cy.fixture("listado-pagina-1").then((pokemonData) => {
+				cy.get(".nombre-pokemon").each(($nombrePokemon, index) =>{
+					cy.wrap($nombrePokemon).should("have.text", pokemonData.results[index]["name"]);
+				});
+			});
+		});
 	});
 });
