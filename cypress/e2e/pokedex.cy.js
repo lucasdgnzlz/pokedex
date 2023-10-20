@@ -183,4 +183,77 @@ context("Pokédex", () => {
 			});
 		});
 	});
+
+	describe("Comprueba correcto funcionamiento de carta pokémon seleccionado", () => {
+		it("Verifica funcionamiento de carta detallada del pokémon elegido", () =>{
+			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20", {
+				fixture: "listado-pagina-1"
+			}).as("apiRequest");
+
+			cy.get(".carta-respuesta").should("not.be.visible");
+
+			cy.get("#beedrill")
+				.should("be.visible")
+				.click();
+
+			cy.intercept("GET", "https://pokeapi.co/api/v2/pokemon/15", {
+				fixture: "beedrill"
+			}).as("apiRequestBeeDrill");
+
+			cy.fixture("beedrill").then((dataBeedrill) => {
+				cy.get(".carta-respuesta").should("be.visible");
+
+				cy.get(".nombre-pokemon-elegido")
+					.should("be.visible")
+					.should("have.text", dataBeedrill.name);
+
+				cy.get(".id-pokemon-elegido")
+					.should("be.visible")
+					.should("have.text", `# ${dataBeedrill.id}`);
+
+				cy.get(".imagen-pokemon-elegido")
+					.should("be.visible")
+					.should("have.attr", "alt", "Pokémon beedrill")
+					.should("have.attr", "src", dataBeedrill.sprites["front_default"]);
+				
+				cy.get(".primer-tipo-pokemon-elegido")
+					.should("be.visible")
+					.should("have.attr", "src", `img/${dataBeedrill.types[0]["type"]["name"]}.svg`);
+
+				cy.get(".segundo-tipo-pokemon-elegido")
+					.should("be.visible")
+					.should("have.attr", "src", `img/${dataBeedrill.types[1]["type"]["name"]}.svg`);
+
+				cy.get(".vida-base-respuesta")
+					.should("be.visible")
+					.should("have.text", dataBeedrill.stats[0]["base_stat"]);
+
+				cy.get(".ataque-base-respuesta")
+					.should("be.visible")
+					.should("have.text", dataBeedrill.stats[1]["base_stat"]);
+
+				cy.get(".defensa-base-respuesta")
+					.should("be.visible")
+					.should("have.text", dataBeedrill.stats[2]["base_stat"]);
+
+				cy.get(".ataque-especial-base-respuesta")
+					.should("be.visible")
+					.should("have.text", dataBeedrill.stats[3]["base_stat"]);
+
+				cy.get(".defensa-especial-base-respuesta")
+					.should("be.visible")
+					.should("have.text", dataBeedrill.stats[4]["base_stat"]);
+
+				cy.get(".velocidad-base-respuesta")
+					.should("be.visible")
+					.should("have.text", dataBeedrill.stats[5]["base_stat"]);
+			});
+
+			cy.get(".boton-cerrar-detalles")
+				.should("be.visible")
+				.click();
+
+			cy.get(".carta-respuesta").should("not.be.visible");
+		});
+	});
 });
