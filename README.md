@@ -23,7 +23,6 @@ Para instalarlo mediante npm:
 Para correr las pruebas en Cypress:
 
 ```bash
-  npm run start
-  npm run cypress:open
+  npm run start-tests
 ```
 
