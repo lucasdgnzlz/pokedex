@@ -1,56 +1,84 @@
 import { hacerSolicitud, buscarPokemonEspecifico } from "./pokedex.js";
 import { validarIdPokemon } from "./validaciones.js";
+import { cargarPokemonesDeLocalStorage, guardarPokemonesEnLocalStorage, cargarDataPokemonDeLocalStorage, guardarDataPokemonEnLocalStorage } from "./storage/pokedex.js";
 
 export async function gestionarPaginas() {
 	const numeroPaginaActual = Number(document.querySelector(".active").textContent);
 	const indicadorPagina = numeroPaginaActual - 1;
 	const cantidadPokemonPorPagina = 20;
-	let indicadorPokemon = indicadorPagina * cantidadPokemonPorPagina;
-
-	ocultarPaginaPrincipal();
-	mostrarPantallaDeCarga();
 
 	try{
-		const data = await hacerSolicitud(indicadorPokemon);
-		gestionarAPI(data);
+		const pokemones = cargarPokemonesDeLocalStorage(numeroPaginaActual);
+		gestionarAPI(indicadorPagina, pokemones);
 		mostrarPaginaPrincipal();
 		ocultarPantallaDeCarga();
 	} catch(e){
-		console.error(e);
+		const data = await hacerSolicitud(indicadorPagina * cantidadPokemonPorPagina);
+		guardarPokemonesEnLocalStorage(numeroPaginaActual, data);
+		gestionarAPI(indicadorPagina, data);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
 	}
 }
 
-function gestionarAPI(data) {
+function gestionarAPI(indicadorPagina, data) {
+	const parametroCalcularIdPokemon = indicadorPagina * 20;
+
 	for (let i = 0; i < data.results.length; i++) {
 		let nombrePokemonABuscar = data.results[i]["name"];
+		const idPokemon = (Number(Object.keys(data.results)[i]) + 1) + parametroCalcularIdPokemon;
 		let indicadorPosicionPokemonEnLista = i;
-		gestionarInformacionPokemon(nombrePokemonABuscar, indicadorPosicionPokemonEnLista);
+		gestionarInformacionPokemon(idPokemon, nombrePokemonABuscar, indicadorPosicionPokemonEnLista);
 	}
 }
 
-async function gestionarInformacionPokemon(nombrePokemon, indicadorPosicionPokemonEnLista) {
-	try {
+async function gestionarInformacionPokemon(idPokemon, nombrePokemon, indicadorPosicionPokemonEnLista) {
+	try{
+		const dataPokemon = cargarDataPokemonDeLocalStorage(idPokemon);
+		mostrarImagenPokemon(dataPokemon, indicadorPosicionPokemonEnLista);
+		mostrarNombrePokemon(dataPokemon, indicadorPosicionPokemonEnLista);
+		mostrarIdentificacionPokemon(dataPokemon, indicadorPosicionPokemonEnLista);
+		mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista);
+	} catch(e){
 		const data = await buscarPokemonEspecifico(nombrePokemon);
+		guardarDataPokemonEnLocalStorage(data);
 		mostrarImagenPokemon(data, indicadorPosicionPokemonEnLista);
 		mostrarNombrePokemon(data, indicadorPosicionPokemonEnLista);
 		mostrarIdentificacionPokemon(data, indicadorPosicionPokemonEnLista);
 		mostrarTiposPokemon(data, indicadorPosicionPokemonEnLista);
-	} catch (error) {
-		console.error(error);
 	}
 }
 
 export async function gestionarBusquedaPokemonEspecifica(idPokemonClickeado) {
-	const respuesta = await buscarPokemonEspecifico(idPokemonClickeado);
-	const data = await respuesta;
-	esconderGrilla();
-	esconderCambioPagina();
-	mostrarCartaPokemonElegido();
-	mostrarImagenPokemonElegido(data);
-	mostrarIdPokemonElegido(data);
-	mostrarNombrePokemonElegido(data);
-	mostrarTiposPokemonElegido(data);
-	mostrarStatsPokemon(data);
+	ocultarPaginaPrincipal();
+	mostrarPantallaDeCarga();
+
+	try{
+		const dataPokemon = cargarDataPokemonDeLocalStorage(idPokemonClickeado);
+		esconderGrilla();
+		esconderCambioPagina();
+		mostrarCartaPokemonElegido();
+		mostrarImagenPokemonElegido(dataPokemon);
+		mostrarIdPokemonElegido(dataPokemon);
+		mostrarNombrePokemonElegido(dataPokemon);
+		mostrarTiposPokemonElegido(dataPokemon);
+		mostrarStatsPokemon(dataPokemon);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
+	} catch(e){
+		const respuesta = await buscarPokemonEspecifico(idPokemonClickeado);
+		const data = await respuesta;
+		esconderGrilla();
+		esconderCambioPagina();
+		mostrarCartaPokemonElegido();
+		mostrarImagenPokemonElegido(data);
+		mostrarIdPokemonElegido(data);
+		mostrarNombrePokemonElegido(data);
+		mostrarTiposPokemonElegido(data);
+		mostrarStatsPokemon(data);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
+	}
 }
 
 export function gestionarCierreDetallesPokemon() {
@@ -69,10 +97,26 @@ export async function gestionarBuscarPokemonPorId() {
 
 	if (error !== "") {
 		mostrarErrorValidacionBuscador(error);
+		mostrarPaginaPrincipal();
+		ocultarPantallaDeCarga();
 	} else {
 		try{
+			const dataPokemon = cargarDataPokemonDeLocalStorage(idPokemonABuscar);
+			esconderGrilla();
+			esconderCambioPagina();
+			eliminarErrorValidacion();
+			mostrarCartaPokemonElegido();
+			mostrarImagenPokemonElegido(dataPokemon);
+			mostrarIdPokemonElegido(dataPokemon);
+			mostrarNombrePokemonElegido(dataPokemon);
+			mostrarTiposPokemonElegido(dataPokemon);
+			mostrarStatsPokemon(dataPokemon);
+			mostrarPaginaPrincipal();
+			ocultarPantallaDeCarga();
+		} catch(e){
 			const respuesta = await buscarPokemonEspecifico(idPokemonABuscar);
 			const data = await respuesta;
+			guardarDataPokemonEnLocalStorage(data);
 			esconderGrilla();
 			esconderCambioPagina();
 			eliminarErrorValidacion();
@@ -84,8 +128,6 @@ export async function gestionarBuscarPokemonPorId() {
 			mostrarStatsPokemon(data);
 			mostrarPaginaPrincipal();
 			ocultarPantallaDeCarga();
-		} catch(e){
-			console.error(e);
 		}
 	} 
 }
@@ -162,10 +204,17 @@ export function gestionarCambioPaginaSiguiente($indicadoresPagina) {
 }
 
 function mostrarImagenPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
-	const $imagenesCartasPokemon = document.querySelectorAll(".imagen-carta");
-	$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].src = dataPokemon.sprites["front_default"];
-	$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].alt = `Pokémon ${dataPokemon.name}`;
-	$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].id = `${dataPokemon.name}`;
+	if(typeof dataPokemon.sprites === "string"){
+		const $imagenesCartasPokemon = document.querySelectorAll(".imagen-carta");
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].src = dataPokemon.sprites;
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].alt = `Pokémon ${dataPokemon.name}`;
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].id = `${dataPokemon.name}`;
+	} else{
+		const $imagenesCartasPokemon = document.querySelectorAll(".imagen-carta");
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].src = dataPokemon.sprites["front_default"];
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].alt = `Pokémon ${dataPokemon.name}`;
+		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].id = `${dataPokemon.name}`;
+	}
 }
 
 function mostrarNombrePokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
@@ -201,8 +250,14 @@ function mostrarTiposPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
 
 function mostrarImagenPokemonElegido(dataPokemon) {
 	const $imagenPokemonElegido = document.querySelector(".imagen-pokemon-elegido");
-	$imagenPokemonElegido.src = dataPokemon.sprites["front_default"];
-	$imagenPokemonElegido.alt = `Pokémon ${dataPokemon.name}`;
+
+	if(typeof dataPokemon.sprites === "string"){
+		$imagenPokemonElegido.src = dataPokemon.sprites;
+		$imagenPokemonElegido.alt = `Pokémon ${dataPokemon.name}`;
+	} else{
+		$imagenPokemonElegido.src = dataPokemon.sprites["front_default"];
+		$imagenPokemonElegido.alt = `Pokémon ${dataPokemon.name}`;
+	}
 }
 
 function mostrarIdPokemonElegido(dataPokemon) {
@@ -237,8 +292,8 @@ function mostrarTiposPokemonElegido(dataPokemon) {
 function mostrarStatsPokemon(dataPokemon) {
 	let vidaPokemon = dataPokemon.stats["0"]["base_stat"];
 	let ataquePokemon = dataPokemon.stats["1"]["base_stat"];
-	let ataqueEspecialPokemon = dataPokemon.stats["2"]["base_stat"];
-	let defensaPokemon = dataPokemon.stats["3"]["base_stat"];
+	let defensaPokemon = dataPokemon.stats["2"]["base_stat"];
+	let ataqueEspecialPokemon = dataPokemon.stats["3"]["base_stat"];
 	let defensaEspecialPokemon = dataPokemon.stats["4"]["base_stat"];
 	let velocidadPokemon = dataPokemon.stats["5"]["base_stat"];
 

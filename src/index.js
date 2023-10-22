@@ -26,12 +26,12 @@ $botonBuscarPokemon.addEventListener("click", () => {
 });
 
 $cartasPokemon.forEach(($carta) => {
-	$carta.addEventListener("click", (e) => {
-		let elementoClickeado = e.target.className;
+	$carta.addEventListener("click", () => {
+		const textoIdPokemon = $carta.querySelector(".numero-identificacion-pokemon").textContent;
+		const idPokemon = Number(textoIdPokemon.match(/\d+/)[0]);
 
-		if (elementoClickeado === "imagen-carta") {
-			let idPokemonClickeado = e.target.id;
-			gestionarBusquedaPokemonEspecifica(idPokemonClickeado);
+		if (typeof idPokemon === "number") {
+			gestionarBusquedaPokemonEspecifica(idPokemon);
 		}
 	});
 });

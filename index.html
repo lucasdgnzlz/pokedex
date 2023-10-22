@@ -15,7 +15,7 @@
       crossorigin="anonymous"
     ></script>
     <link href="https://unpkg.com/pattern.css" rel="stylesheet" />
-    <link rel="stylesheet" href="docs/index.css" />
+    <link rel="stylesheet" href="src/index.css" />
     <link rel="shortcut icon" href="img/logo-pokeball.png" />
     <title>Pokédex</title>
   </head>
@@ -31,6 +31,7 @@
             class="form-control buscador-pokemon"
             aria-label="buscar-pokemon"
             placeholder="Seleccione un Pokémon!"
+            id=""
           />
           <button type="button" class="btn btn-outline-secondary boton-buscar-pokemon">Buscar</button>
         </div>
@@ -530,7 +531,7 @@
 
           <div class="contenedor-cambio-pagina">
             <nav aria-label="Page navigation example">
-              <ul class="pagination">
+              <ul class="pagination paginador">
                 <li class="page-item indicador-estado-anterior disabled">
                   <a class="page-link boton-anterior-pagina" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
@@ -611,11 +612,11 @@
         <div class="col pattern-diagonal-stripes-lg columna-decoracion"></div>
       </div>
 
-      <div class="pantalla-de-carga">
+      <div class="pantalla-de-carga" id="">
         <p>Cargando...</p>
       </div>
     </main>
 
-    <script src="docs/index.js" type="module"></script>
+    <script src="src/index.js" type="module"></script>
   </body>
 </html>
