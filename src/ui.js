@@ -7,9 +7,6 @@ export async function gestionarPaginas() {
 	const indicadorPagina = numeroPaginaActual - 1;
 	const cantidadPokemonPorPagina = 20;
 
-	ocultarPaginaPrincipal();
-	mostrarPantallaDeCarga();
-
 	try{
 		const pokemones = cargarPokemonesDeLocalStorage(numeroPaginaActual);
 		gestionarAPI(indicadorPagina, pokemones);
@@ -295,8 +292,8 @@ function mostrarTiposPokemonElegido(dataPokemon) {
 function mostrarStatsPokemon(dataPokemon) {
 	let vidaPokemon = dataPokemon.stats["0"]["base_stat"];
 	let ataquePokemon = dataPokemon.stats["1"]["base_stat"];
-	let ataqueEspecialPokemon = dataPokemon.stats["2"]["base_stat"];
-	let defensaPokemon = dataPokemon.stats["3"]["base_stat"];
+	let defensaPokemon = dataPokemon.stats["2"]["base_stat"];
+	let ataqueEspecialPokemon = dataPokemon.stats["3"]["base_stat"];
 	let defensaEspecialPokemon = dataPokemon.stats["4"]["base_stat"];
 	let velocidadPokemon = dataPokemon.stats["5"]["base_stat"];
 
