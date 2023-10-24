@@ -10,6 +10,7 @@
       "ecmaVersion": "latest",
       "sourceType": "module"
   },
+  "ignorePatterns": ["babel.config.js"],
   "rules": {
       "indent": [
           "error",
