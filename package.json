@@ -10,7 +10,8 @@
     "start-server": "http-server",
     "cypress:open": "cypress open",
     "start-tests": "run-p start-server cypress:open",
-    "test": "jest"
+    "test:dev": "jest --watchAll",
+    "test": "jest --collect-coverage"
   },
   "repository": {
     "type": "git",
