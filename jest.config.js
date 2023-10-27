@@ -1,7 +1,7 @@
 module.exports = {
-	verbose: true,
-	rootDir: "src",
-	coverageDirectory: "../coverage/",
-	testPathIgnorePatterns: ["/node_modules/", ".*fixture.js"],
-	coveragePathIgnorePatterns: ["/node_modules/", ".*fixture.js"],
+  testEnvironment: 'node',
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$',
+  transform: {
+    '^.+\\.jsx?$': 'babel-jest',
+  },
 };
