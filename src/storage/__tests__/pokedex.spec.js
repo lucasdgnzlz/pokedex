@@ -1,5 +1,7 @@
 /// <reference types="Jest" />
 
+import "jest-localstorage-mock";
+
 import{
 	guardarPokemonesEnLocalStorage
 } from "../pokedex.js";
@@ -13,5 +15,15 @@ describe("pokedex", () => {
 				guardarPokemonesEnLocalStorage(listaDeArgumentos[i][0], listaDeArgumentos[i][1]);
 			}).toThrowError("Se necesita el número de la página a la que pertenece la data, y los pokemones para guardar en el localStorage");
 		}
+	});
+
+	it("Debería guardar los datos de los pokemones al pasar parámetros correctos", () => {
+		const numeroPruebaDePagina = 1;
+		const datosDePrueba = {nombre: "Pikachu", tipos: ["electrico"]};
+
+		guardarPokemonesEnLocalStorage(numeroPruebaDePagina, datosDePrueba);
+
+		expect(JSON.parse(localStorage.getItem(`pagina_${numeroPruebaDePagina}`))["nombre"]).toEqual("Pikachu");
+		expect(JSON.parse(localStorage.getItem(`pagina_${numeroPruebaDePagina}`))["tipos"][0]).toEqual("electrico");
 	});
 });
