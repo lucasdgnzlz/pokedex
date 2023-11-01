@@ -3,7 +3,8 @@
 import "jest-localstorage-mock";
 
 import{
-	guardarPokemonesEnLocalStorage
+	guardarPokemonesEnLocalStorage,
+	cargarPokemonesDeLocalStorage
 } from "../pokedex.js";
 
 describe("guardarPokemonesEnLocalStorage", () => {	
@@ -25,5 +26,15 @@ describe("guardarPokemonesEnLocalStorage", () => {
 
 		expect(JSON.parse(localStorage.getItem(`pagina_${numeroPruebaDePagina}`))["nombre"]).toEqual("Pikachu");
 		expect(JSON.parse(localStorage.getItem(`pagina_${numeroPruebaDePagina}`))["tipos"][0]).toEqual("electrico");
+	});
+});
+
+describe(("cargarPokemonesDeLocalStorage"), () => {
+	it(("Debería devolver un mensaje de error al pasarle un parámetro de tipo undefined"), () => {
+		const numeroDePagina = undefined;
+
+		expect(() => {
+			cargarPokemonesDeLocalStorage(numeroDePagina);
+		}).toThrowError("Se necesita una cantidad y un indicador de página para cargar a los pokemones");
 	});
 });
