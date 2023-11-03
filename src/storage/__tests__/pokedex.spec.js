@@ -4,7 +4,8 @@ import "jest-localstorage-mock";
 
 import{
 	guardarPokemonesEnLocalStorage,
-	cargarPokemonesDeLocalStorage
+	cargarPokemonesDeLocalStorage,
+	guardarDataPokemonEnLocalStorage
 } from "../pokedex.js";
 
 describe("guardarPokemonesEnLocalStorage", () => {	
@@ -56,5 +57,15 @@ describe(("cargarPokemonesDeLocalStorage"), () => {
 		const datosCargadosLocalStorage = cargarPokemonesDeLocalStorage(numeroPruebaDePagina, datosDePrueba);
 
 		expect((datosCargadosLocalStorage)).toEqual(datosDePrueba);
+	});
+});
+
+describe(("guardarDataPokemonEnLocalStorage"), () => {
+	it(("Debería devolver un mensaje de error al enviar un argumento invalido"), () => {
+		const stringDePrueba = "";
+		
+		expect(() => {
+			guardarDataPokemonEnLocalStorage(stringDePrueba);
+		}).toThrowError("Se necesita la data del pokémon para guardarla en el localStorage");
 	});
 });
