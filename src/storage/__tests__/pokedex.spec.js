@@ -46,4 +46,15 @@ describe(("cargarPokemonesDeLocalStorage"), () => {
 			cargarPokemonesDeLocalStorage(numeroDePagina);
 		}).toThrowError("Pagina 1 de Pokemones no se encontró en el localStorage");
 	});
+
+	it(("Debería guardar y devolver la data de los pokemones"), () => {
+		localStorage.clear();
+		const numeroPruebaDePagina = 1;
+		const datosDePrueba = {nombre: "Pikachu", tipos: ["electrico"]};
+
+		guardarPokemonesEnLocalStorage(numeroPruebaDePagina, datosDePrueba);
+		const datosCargadosLocalStorage = cargarPokemonesDeLocalStorage(numeroPruebaDePagina, datosDePrueba);
+
+		expect((datosCargadosLocalStorage)).toEqual(datosDePrueba);
+	});
 });
