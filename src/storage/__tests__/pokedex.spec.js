@@ -37,4 +37,13 @@ describe(("cargarPokemonesDeLocalStorage"), () => {
 			cargarPokemonesDeLocalStorage(numeroDePagina);
 		}).toThrowError("Se necesita una cantidad y un indicador de página para cargar a los pokemones");
 	});
+
+	it(("Debería devolver un mensaje de error si 'pokemones' es igual a null"), () => {
+		localStorage.clear();
+		const numeroDePagina = 1;
+		
+		expect(() => {
+			cargarPokemonesDeLocalStorage(numeroDePagina);
+		}).toThrowError("Pagina 1 de Pokemones no se encontró en el localStorage");
+	});
 });
