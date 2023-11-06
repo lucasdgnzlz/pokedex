@@ -53,13 +53,13 @@ describe(("cargarPokemonesDeLocalStorage"), () => {
 
 	it(("Debería guardar y devolver la data de los pokemones"), () => {
 		localStorage.clear();
-		const numeroPruebaDePagina = 1;
-		const datosDePrueba = {nombre: "Pikachu", tipos: ["electrico"]};
+		const NUMERO_PAGINA_PRUEBA = 1;
+		const datosPaginaDePrueba = fixturePaginaUno;
 
-		guardarPokemonesEnLocalStorage(numeroPruebaDePagina, datosDePrueba);
-		const datosCargadosLocalStorage = cargarPokemonesDeLocalStorage(numeroPruebaDePagina, datosDePrueba);
+		guardarPokemonesEnLocalStorage(NUMERO_PAGINA_PRUEBA, datosPaginaDePrueba);
+		const datosCargadosLocalStorage = cargarPokemonesDeLocalStorage(NUMERO_PAGINA_PRUEBA, datosPaginaDePrueba);
 
-		expect((datosCargadosLocalStorage)).toEqual(datosDePrueba);
+		expect((datosCargadosLocalStorage)).toEqual(datosPaginaDePrueba);
 	});
 });
 
