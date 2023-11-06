@@ -8,6 +8,8 @@ import{
 	guardarDataPokemonEnLocalStorage
 } from "../pokedex.js";
 
+import fixtureBeedrill from "../../../cypress/fixtures/beedrill.json";
+
 describe("guardarPokemonesEnLocalStorage", () => {	
 	it("Debería devolver un mensaje de error por no cumplir con ninguna de las condiciones", () => {
 		const listaDeArgumentos = [["1", { objetoDePrueba: "valor de prueba" }], [1, "stringDePrueba"]];
