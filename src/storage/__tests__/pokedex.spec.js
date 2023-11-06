@@ -24,13 +24,13 @@ describe("guardarPokemonesEnLocalStorage", () => {
 	});
 
 	it("Debería guardar los datos de los pokemones al pasar parámetros correctos", () => {
-		const numeroPruebaDePagina = 1;
+		const NUMERO_PAGINA_PRUEBA = 1;
 		const datosDePrueba = {nombre: "Pikachu", tipos: ["electrico"]};
 
-		guardarPokemonesEnLocalStorage(numeroPruebaDePagina, datosDePrueba);
+		guardarPokemonesEnLocalStorage(NUMERO_PAGINA_PRUEBA, datosDePrueba);
 
-		expect(JSON.parse(localStorage.getItem(`pagina_${numeroPruebaDePagina}`))["nombre"]).toEqual("Pikachu");
-		expect(JSON.parse(localStorage.getItem(`pagina_${numeroPruebaDePagina}`))["tipos"][0]).toEqual("electrico");
+		expect(JSON.parse(localStorage.getItem(`pagina_${NUMERO_PAGINA_PRUEBA}`))["nombre"]).toEqual("Pikachu");
+		expect(JSON.parse(localStorage.getItem(`pagina_${NUMERO_PAGINA_PRUEBA}`))["tipos"][0]).toEqual("electrico");
 	});
 });
 
