@@ -29,8 +29,8 @@ describe("guardarPokemonesEnLocalStorage", () => {
 
 		guardarPokemonesEnLocalStorage(NUMERO_PAGINA_PRUEBA, datosDePrueba);
 
-		expect(JSON.parse(localStorage.getItem(`pagina_${NUMERO_PAGINA_PRUEBA}`))["count"]).toEqual(1292);
-		expect(JSON.parse(localStorage.getItem(`pagina_${NUMERO_PAGINA_PRUEBA}`))["previous"]).toEqual(null);
+		expect(JSON.parse(localStorage.getItem(`pagina_${NUMERO_PAGINA_PRUEBA}`))["count"]).toEqual(datosDePrueba["count"]);
+		expect(JSON.parse(localStorage.getItem(`pagina_${NUMERO_PAGINA_PRUEBA}`))["previous"]).toEqual(datosDePrueba["previous"]);
 	});
 });
 
