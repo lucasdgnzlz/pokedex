@@ -1,6 +1,6 @@
-import { hacerSolicitud, buscarPokemonEspecifico } from "./pokedex.js";
-import { validarIdPokemon } from "./validaciones.js";
-import { cargarPokemonesDeLocalStorage, guardarPokemonesEnLocalStorage, cargarDataPokemonDeLocalStorage, guardarDataPokemonEnLocalStorage } from "./storage/pokedex.js";
+import { hacerSolicitud, buscarPokemonEspecifico } from "../pokedex.js";
+import { validarIdPokemon } from "../validaciones.js";
+import { cargarPokemonesDeLocalStorage, guardarPokemonesEnLocalStorage, cargarDataPokemonDeLocalStorage, guardarDataPokemonEnLocalStorage } from "../storage/pokedex.js";
 
 export async function gestionarPaginas() {
 	const numeroPaginaActual = Number(document.querySelector(".active").textContent);
