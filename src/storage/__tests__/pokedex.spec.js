@@ -25,12 +25,12 @@ describe("guardarPokemonesEnLocalStorage", () => {
 
 	it("Debería guardar los datos de los pokemones al pasar parámetros correctos", () => {
 		const NUMERO_PAGINA_PRUEBA = 1;
-		const datosDePrueba = {nombre: "Pikachu", tipos: ["electrico"]};
+		const datosDePrueba = fixturePaginaUno;
 
 		guardarPokemonesEnLocalStorage(NUMERO_PAGINA_PRUEBA, datosDePrueba);
 
-		expect(JSON.parse(localStorage.getItem(`pagina_${NUMERO_PAGINA_PRUEBA}`))["nombre"]).toEqual("Pikachu");
-		expect(JSON.parse(localStorage.getItem(`pagina_${NUMERO_PAGINA_PRUEBA}`))["tipos"][0]).toEqual("electrico");
+		expect(JSON.parse(localStorage.getItem(`pagina_${NUMERO_PAGINA_PRUEBA}`))["count"]).toEqual(1292);
+		expect(JSON.parse(localStorage.getItem(`pagina_${NUMERO_PAGINA_PRUEBA}`))["previous"]).toEqual(null);
 	});
 });
 
