@@ -83,3 +83,11 @@ describe(("guardarDataPokemonEnLocalStorage"), () => {
 		expect((dataPokemonGuardadosEnLocalStorage["id"])).toEqual(dataPokemonDePrueba["id"]);
 	});
 });
+
+describe(("cargarDataPokemonDeLocalStorage"), () => {
+	it(("Debería devolver un mensaje de error al ser el id del pokémon undefined"), () =>{
+		expect(() => {
+			cargarDataPokemonDeLocalStorage(undefined);
+		}).toThrowError("Se necesita un identificador para cargar el pokémon correspondiente");
+	});
+});
