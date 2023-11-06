@@ -70,4 +70,15 @@ describe(("guardarDataPokemonEnLocalStorage"), () => {
 			guardarDataPokemonEnLocalStorage(stringDePrueba);
 		}).toThrowError("Se necesita la data del pokémon para guardarla en el localStorage");
 	});
+
+	it(("Debería guardar la data con éxito al pasarle un argumento correcto"), () => {
+		localStorage.clear();
+		const dataPokemonDePrueba = fixtureBeedrill;
+		guardarDataPokemonEnLocalStorage(dataPokemonDePrueba);
+
+		const dataPokemonGuardadosEnLocalStorage = JSON.parse(localStorage.getItem(`pokemon_${dataPokemonDePrueba["id"]}`));
+
+		expect((dataPokemonGuardadosEnLocalStorage["name"])).toEqual(dataPokemonDePrueba["name"]);
+		expect((dataPokemonGuardadosEnLocalStorage["id"])).toEqual(dataPokemonDePrueba["id"]);
+	});
 });
