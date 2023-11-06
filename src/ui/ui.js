@@ -1,5 +1,5 @@
-import { hacerSolicitud, buscarPokemonEspecifico } from "../pokedex.js";
-import { validarIdPokemon } from "../validaciones.js";
+import { hacerSolicitud, buscarPokemonEspecifico } from "../api/pokedex.js";
+import { validarIdPokemon } from "../validaciones/validaciones.js";
 import { cargarPokemonesDeLocalStorage, guardarPokemonesEnLocalStorage, cargarDataPokemonDeLocalStorage, guardarDataPokemonEnLocalStorage } from "../storage/pokedex.js";
 
 export async function gestionarPaginas() {
