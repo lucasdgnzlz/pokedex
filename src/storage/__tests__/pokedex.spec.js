@@ -90,4 +90,14 @@ describe(("cargarDataPokemonDeLocalStorage"), () => {
 			cargarDataPokemonDeLocalStorage(undefined);
 		}).toThrowError("Se necesita un identificador para cargar el pokémon correspondiente");
 	});
+
+	it(("Debería devolver un mensaje de error al intentar cargar la data y que devuelva null"), () => {
+		localStorage.clear();
+
+		const  ID_DE_PRUEBA = 25;
+
+		expect(() => {
+			cargarDataPokemonDeLocalStorage(ID_DE_PRUEBA);
+		}).toThrowError(`Pokémon #${ID_DE_PRUEBA} no se encontró en el localStorage`);
+	});
 });
