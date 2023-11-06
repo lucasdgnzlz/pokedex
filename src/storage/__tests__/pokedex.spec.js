@@ -5,7 +5,8 @@ import "jest-localstorage-mock";
 import{
 	guardarPokemonesEnLocalStorage,
 	cargarPokemonesDeLocalStorage,
-	guardarDataPokemonEnLocalStorage
+	guardarDataPokemonEnLocalStorage,
+	cargarDataPokemonDeLocalStorage
 } from "../pokedex.js";
 
 import fixtureBeedrill from "../../../cypress/fixtures/beedrill.json";
