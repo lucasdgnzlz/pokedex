@@ -9,6 +9,7 @@ import{
 	cargarDataPokemonDeLocalStorage
 } from "../pokedex.js";
 
+import fixturePaginaUno from "../../../cypress/fixtures/listado-pagina-1.json";
 import fixtureBeedrill from "../../../cypress/fixtures/beedrill.json";
 
 describe("guardarPokemonesEnLocalStorage", () => {	
