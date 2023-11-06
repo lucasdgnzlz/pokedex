@@ -100,4 +100,16 @@ describe(("cargarDataPokemonDeLocalStorage"), () => {
 			cargarDataPokemonDeLocalStorage(ID_DE_PRUEBA);
 		}).toThrowError(`Pokémon #${ID_DE_PRUEBA} no se encontró en el localStorage`);
 	});
+
+	it(("Debería devolver la data del pokémon correctamente al pasarle su id"), () => {
+		localStorage.clear();
+
+		const dataPokemonDePrueba = fixtureBeedrill;
+
+		guardarDataPokemonEnLocalStorage(dataPokemonDePrueba);
+		const dataPokemon = cargarDataPokemonDeLocalStorage(dataPokemonDePrueba.id);
+
+		expect((dataPokemon["id"])).toEqual(dataPokemonDePrueba["id"]);
+		expect((dataPokemon["name"])).toEqual(dataPokemonDePrueba["name"]);
+	});
 });
