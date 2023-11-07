@@ -1,4 +1,4 @@
-import{ validarIdPokemon } from "./validaciones.js";
+import{ validarIdPokemon } from "../validaciones/validaciones.js";
 
 function probarValidacionIdPokemon() {
 	console.assert(
