@@ -1,6 +1,8 @@
 import { hacerSolicitud, buscarPokemonEspecifico } from "../api/pokedex.js";
 import { validarIdPokemon } from "../validaciones/validaciones.js";
 import { cargarPokemonesDeLocalStorage, guardarPokemonesEnLocalStorage, cargarDataPokemonDeLocalStorage, guardarDataPokemonEnLocalStorage } from "../storage/pokedex.js";
+import {mostrarErrorValidacionBuscador, eliminarErrorValidacion} from "./validacionBuscador.js";
+
 
 export async function gestionarPaginas() {
 	const numeroPaginaActual = Number(document.querySelector(".active").textContent);
@@ -310,20 +312,6 @@ function mostrarStatsPokemon(dataPokemon) {
 	$respuestaAtaqueEspecialPokemon.textContent = ataqueEspecialPokemon;
 	$respuestaDefensaEspecialPokemon.textContent = defensaEspecialPokemon;
 	$respuestaVelocidadPokemon.textContent = velocidadPokemon;
-}
-
-function mostrarErrorValidacionBuscador(error) {
-	const $buscadorPokemon = document.querySelector(".buscador-pokemon");
-	$buscadorPokemon.classList.add("is-invalid");
-	$buscadorPokemon.placeholder = error;
-	$buscadorPokemon.id = "error-validacion";
-}
-
-function eliminarErrorValidacion() {
-	const $buscadorPokemon = document.querySelector(".buscador-pokemon");
-	$buscadorPokemon.classList.remove("is-invalid");
-	$buscadorPokemon.placeholder = "Seleccione un Pokémon!";
-	$buscadorPokemon.id = "";
 }
 
 function esconderGrilla() {
