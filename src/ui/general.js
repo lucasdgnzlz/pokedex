@@ -1,8 +1,8 @@
 import { hacerSolicitud, buscarPokemonEspecifico } from "../api/pokedex.js";
 import { validarIdPokemon } from "../validaciones/validaciones.js";
 import { cargarPokemonesDeLocalStorage, guardarPokemonesEnLocalStorage, cargarDataPokemonDeLocalStorage, guardarDataPokemonEnLocalStorage } from "../storage/pokedex.js";
-import { mostrarErrorValidacionBuscador, eliminarErrorValidacion} from "./validacionBuscador.js";
-import { mostrarImagenPokemon, mostrarNombrePokemon, mostrarIdentificacionPokemon, mostrarTiposPokemon, mostrarImagenPokemonElegido, mostrarIdPokemonElegido, mostrarNombrePokemonElegido, mostrarTiposPokemonElegido, mostrarStatsPokemon} from "./cartasPokemon.js";
+import { mostrarErrorValidacionBuscador, eliminarErrorValidacion } from "./validacionBuscador.js";
+import { mostrarImagenPokemon, mostrarNombrePokemon, mostrarIdentificacionPokemon, mostrarTiposPokemon, mostrarImagenPokemonElegido, mostrarIdPokemonElegido, mostrarNombrePokemonElegido, mostrarTiposPokemonElegido, mostrarStatsPokemon, ocultarCartaPokemonElegido, mostrarCartaPokemonElegido } from "./cartasPokemon.js";
 
 export async function gestionarPaginas() {
 	const numeroPaginaActual = Number(document.querySelector(".active").textContent);
@@ -213,16 +213,6 @@ function esconderGrilla() {
 function mostrarGrilla() {
 	const $grillaPokemon = document.querySelector(".contenedor-grilla");
 	$grillaPokemon.id = "";
-}
-
-function ocultarCartaPokemonElegido() {
-	const $cartaPokemonElegido = document.querySelector(".carta-respuesta");
-	$cartaPokemonElegido.id = "oculto";
-}
-
-function mostrarCartaPokemonElegido() {
-	const $cartaPokemonElegido = document.querySelector(".carta-respuesta");
-	$cartaPokemonElegido.id = "";
 }
 
 function esconderPaginador() {

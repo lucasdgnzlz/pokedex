@@ -106,3 +106,13 @@ export function mostrarStatsPokemon(dataPokemon) {
 	$respuestaDefensaEspecialPokemon.textContent = defensaEspecialPokemon;
 	$respuestaVelocidadPokemon.textContent = velocidadPokemon;
 }
+
+export function ocultarCartaPokemonElegido() {
+	const $cartaPokemonElegido = document.querySelector(".carta-respuesta");
+	$cartaPokemonElegido.id = "oculto";
+}
+
+export function mostrarCartaPokemonElegido() {
+	const $cartaPokemonElegido = document.querySelector(".carta-respuesta");
+	$cartaPokemonElegido.id = "";
+}
