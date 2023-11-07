@@ -3,6 +3,7 @@ import { validarIdPokemon } from "../validaciones/validaciones.js";
 import { cargarPokemonesDeLocalStorage, guardarPokemonesEnLocalStorage, cargarDataPokemonDeLocalStorage, guardarDataPokemonEnLocalStorage } from "../storage/pokedex.js";
 import { mostrarErrorValidacionBuscador, eliminarErrorValidacion } from "./validacionBuscador.js";
 import { mostrarImagenPokemon, mostrarNombrePokemon, mostrarIdentificacionPokemon, mostrarTiposPokemon, mostrarImagenPokemonElegido, mostrarIdPokemonElegido, mostrarNombrePokemonElegido, mostrarTiposPokemonElegido, mostrarStatsPokemon, ocultarCartaPokemonElegido, mostrarCartaPokemonElegido } from "./cartasPokemon.js";
+import { esconderPaginador, mostrarPaginador, actualizarNumerosIndicadorPagina, desactivarPaginaActiva, mostrarNumeroPaginaActiva, activarBotonAnteriorPagina, desactivarBotonAnteriorPagina, activarBotonSiguientePagina, desactivarBotonSiguientePagina } from "./paginador.js";
 
 export async function gestionarPaginas() {
 	const numeroPaginaActual = Number(document.querySelector(".active").textContent);
@@ -213,83 +214,6 @@ function esconderGrilla() {
 function mostrarGrilla() {
 	const $grillaPokemon = document.querySelector(".contenedor-grilla");
 	$grillaPokemon.id = "";
-}
-
-function esconderPaginador() {
-	const $contenedorCambioPagina = document.querySelector(".contenedor-cambio-pagina");
-	$contenedorCambioPagina.id = "oculto";
-}
-
-function mostrarPaginador() {
-	const $contenedorCambioPagina = document.querySelector(".contenedor-cambio-pagina");
-	$contenedorCambioPagina.id = "";
-}
-
-function actualizarNumerosIndicadorPagina(accionar, $indicadoresPagina, indicadorPaginaSolicitada) {
-	let accionesModal = ["anterior", "siguiente", "especifico"];
-
-	if (accionar === accionesModal[0]) {
-		let numeroAImprimir = indicadorPaginaSolicitada;
-		$indicadoresPagina.forEach(($indicador) => {
-			$indicador.textContent = numeroAImprimir;
-			numeroAImprimir++;
-		});
-	} else if (accionar === accionesModal[1]) {
-		let numeroAImprimir = indicadorPaginaSolicitada + 2;
-		$indicadoresPagina.forEach(($indicador) => {
-			$indicador.textContent = numeroAImprimir;
-			numeroAImprimir++;
-		});
-	} else if (accionar === accionesModal[2]) {
-		let numeroAImprimir = indicadorPaginaSolicitada + 1;
-		$indicadoresPagina.forEach(($indicador) => {
-			$indicador.textContent = numeroAImprimir;
-			numeroAImprimir++;
-		});
-	} else {
-		return false;
-	}
-}
-
-function desactivarPaginaActiva() {
-	const $contenedoresNumerosPagina = document.querySelectorAll(".pagina-item");
-
-	$contenedoresNumerosPagina.forEach(($contenedorNumeroPagina) => {
-		$contenedorNumeroPagina.classList.remove("active");
-	});
-}
-
-function mostrarNumeroPaginaActiva(indicadorPaginaSolicitada) {
-	const numeroPaginaActual = indicadorPaginaSolicitada + 1;
-	const $contenedoresNumerosPagina = document.querySelectorAll(".pagina-item");
-
-	$contenedoresNumerosPagina.forEach(($contenedorNumeroPagina) => {
-		const numeroIndicador = Number($contenedorNumeroPagina.textContent);
-
-		if (numeroIndicador === numeroPaginaActual) {
-			$contenedorNumeroPagina.classList.add("active");
-		}
-	});
-}
-
-function activarBotonAnteriorPagina() {
-	const $estadoBotonAnterior = document.querySelector(".indicador-estado-anterior");
-	$estadoBotonAnterior.classList.remove("disabled");
-}
-
-function desactivarBotonAnteriorPagina() {
-	const $estadoBotonAnterior = document.querySelector(".indicador-estado-anterior");
-	$estadoBotonAnterior.classList.add("disabled");
-}
-
-function activarBotonSiguientePagina() {
-	const $estadoBotonAnterior = document.querySelector(".indicador-estado-siguiente");
-	$estadoBotonAnterior.classList.remove("disabled");
-}
-
-function desactivarBotonSiguientePagina() {
-	const $estadoBotonAnterior = document.querySelector(".indicador-estado-siguiente");
-	$estadoBotonAnterior.classList.add("disabled");
 }
 
 function mostrarPantallaDeCarga(){
