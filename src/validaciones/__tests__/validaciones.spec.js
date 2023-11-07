@@ -8,4 +8,10 @@ describe(("validarIdPokemon"), () => {
 
 		expect(validarIdPokemon(ID_DE_PRUEBA)).toBe("Solo acepto números!");
 	});
+
+	it(("Debería devolver un texto vacío dando a indicar que cumple la validación"), () => {
+		const ID_DE_PRUEBA = 321;
+
+		expect(validarIdPokemon(ID_DE_PRUEBA)).toBe("");
+	});
 });
