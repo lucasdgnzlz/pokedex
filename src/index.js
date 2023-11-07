@@ -6,7 +6,7 @@ import {
 	gestionarBuscarPokemonPorId,
 	gestionarBusquedaPokemonEspecifica,
 	gestionarCierreDetallesPokemon,
-} from "./ui/ui.js";
+} from "./ui/general.js";
 
 const $botonBuscarPokemon = document.querySelector(".boton-buscar-pokemon");
 const $indicadoresPagina = document.querySelectorAll(".indicador-pagina");
