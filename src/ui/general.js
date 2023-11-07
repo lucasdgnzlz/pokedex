@@ -86,7 +86,7 @@ export async function gestionarBusquedaPokemonEspecifica(idPokemonClickeado) {
 export function gestionarCierreDetallesPokemon() {
 	ocultarCartaPokemonElegido();
 	mostrarGrilla();
-	mostrarCambioPagina();
+	mostrarPaginador();
 }
 
 export async function gestionarBuscarPokemonPorId() {
@@ -230,7 +230,7 @@ function esconderPaginador() {
 	$contenedorCambioPagina.id = "oculto";
 }
 
-function mostrarCambioPagina() {
+function mostrarPaginador() {
 	const $contenedorCambioPagina = document.querySelector(".contenedor-cambio-pagina");
 	$contenedorCambioPagina.id = "";
 }
