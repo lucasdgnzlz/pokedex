@@ -58,7 +58,7 @@ export async function gestionarBusquedaPokemonEspecifica(idPokemonClickeado) {
 	try{
 		const dataPokemon = cargarDataPokemonDeLocalStorage(idPokemonClickeado);
 		esconderGrilla();
-		esconderCambioPagina();
+		esconderPaginador();
 		mostrarCartaPokemonElegido();
 		mostrarImagenPokemonElegido(dataPokemon);
 		mostrarIdPokemonElegido(dataPokemon);
@@ -71,7 +71,7 @@ export async function gestionarBusquedaPokemonEspecifica(idPokemonClickeado) {
 		const respuesta = await buscarPokemonEspecifico(idPokemonClickeado);
 		const data = await respuesta;
 		esconderGrilla();
-		esconderCambioPagina();
+		esconderPaginador();
 		mostrarCartaPokemonElegido();
 		mostrarImagenPokemonElegido(data);
 		mostrarIdPokemonElegido(data);
@@ -105,7 +105,7 @@ export async function gestionarBuscarPokemonPorId() {
 		try{
 			const dataPokemon = cargarDataPokemonDeLocalStorage(idPokemonABuscar);
 			esconderGrilla();
-			esconderCambioPagina();
+			esconderPaginador();
 			eliminarErrorValidacion();
 			mostrarCartaPokemonElegido();
 			mostrarImagenPokemonElegido(dataPokemon);
@@ -120,7 +120,7 @@ export async function gestionarBuscarPokemonPorId() {
 			const data = await respuesta;
 			guardarDataPokemonEnLocalStorage(data);
 			esconderGrilla();
-			esconderCambioPagina();
+			esconderPaginador();
 			eliminarErrorValidacion();
 			mostrarCartaPokemonElegido();
 			mostrarImagenPokemonElegido(data);
@@ -225,7 +225,7 @@ function mostrarCartaPokemonElegido() {
 	$cartaPokemonElegido.id = "";
 }
 
-function esconderCambioPagina() {
+function esconderPaginador() {
 	const $contenedorCambioPagina = document.querySelector(".contenedor-cambio-pagina");
 	$contenedorCambioPagina.id = "oculto";
 }
