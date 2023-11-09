@@ -1,11 +1,11 @@
 export function mostrarImagenPokemon(dataPokemon, indicadorPosicionPokemonEnLista) {
+	const $imagenesCartasPokemon = document.querySelectorAll(".imagen-carta");
+
 	if(typeof dataPokemon.sprites === "string"){
-		const $imagenesCartasPokemon = document.querySelectorAll(".imagen-carta");
 		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].src = dataPokemon.sprites;
 		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].alt = `Pokémon ${dataPokemon.name}`;
 		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].id = `${dataPokemon.name}`;
 	} else{
-		const $imagenesCartasPokemon = document.querySelectorAll(".imagen-carta");
 		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].src = dataPokemon.sprites["front_default"];
 		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].alt = `Pokémon ${dataPokemon.name}`;
 		$imagenesCartasPokemon[indicadorPosicionPokemonEnLista].id = `${dataPokemon.name}`;
