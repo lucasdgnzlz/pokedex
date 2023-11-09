@@ -20,9 +20,7 @@ describe(("mostrarImagenPokemon"), () =>{
 		expect(document.querySelectorAll(".imagen-carta")[INDICADOR_DE_PRUEBA].src).toBe("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png");
 	});
 
-	it(("Muestra la imagen del pokémon con la data cargada del localStorage"), () =>{
-		localStorage.clear();
-		
+	it(("Muestra la imagen del pokémon con la data cargada del localStorage"), () =>{		
 		document.body.innerHTML = fixtureCartasPokemon;
 		const INDICADOR_DE_PRUEBA = 3;
 		
@@ -33,5 +31,7 @@ describe(("mostrarImagenPokemon"), () =>{
 
 		mostrarImagenPokemon(dataPokemon, INDICADOR_DE_PRUEBA);
 		expect(document.querySelectorAll(".imagen-carta")[INDICADOR_DE_PRUEBA].src).toBe("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png");
+		
+		localStorage.clear();
 	});
 });
