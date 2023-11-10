@@ -155,3 +155,26 @@ describe(("mostrarTiposPokemonElegido"), () => {
 		expect(document.querySelector(".segundo-tipo-pokemon-elegido").src).toEqual(`http://localhost/img/${tiposPokemon[1]}.svg`);
 	});
 });
+
+describe(("mostrarStatsPokemon"), () => {
+	it(("Muestra las stats del pokémon elegido"), () => {
+		document.body.innerHTML = fixtureCartaPokemonElegido;
+		const dataPokemon = fixturePokemonDePrueba;
+
+		mostrarStatsPokemon(dataPokemon);
+
+		let vidaPokemon = dataPokemon.stats["0"]["base_stat"];
+		let ataquePokemon = dataPokemon.stats["1"]["base_stat"];
+		let defensaPokemon = dataPokemon.stats["2"]["base_stat"];
+		let ataqueEspecialPokemon = dataPokemon.stats["3"]["base_stat"];
+		let defensaEspecialPokemon = dataPokemon.stats["4"]["base_stat"];
+		let velocidadPokemon = dataPokemon.stats["5"]["base_stat"];
+
+		expect(document.querySelector(".vida-base-respuesta").textContent).toEqual(`${vidaPokemon}`);
+		expect(document.querySelector(".ataque-base-respuesta").textContent).toEqual(`${ataquePokemon}`);
+		expect(document.querySelector(".defensa-base-respuesta").textContent).toEqual(`${defensaPokemon}`);
+		expect(document.querySelector(".ataque-especial-base-respuesta").textContent).toEqual(`${ataqueEspecialPokemon}`);
+		expect(document.querySelector(".defensa-especial-base-respuesta").textContent).toEqual(`${defensaEspecialPokemon}`);
+		expect(document.querySelector(".velocidad-base-respuesta").textContent).toEqual(`${velocidadPokemon}`);
+	});
+});
