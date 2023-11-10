@@ -100,6 +100,8 @@ describe(("mostrarImagenPokemonElegido"), () => {
 		mostrarImagenPokemonElegido(dataCargadaDeLocalStorage);
 
 		expect(document.querySelector(".imagen-pokemon-elegido").src).toEqual(dataCargadaDeLocalStorage.sprites);
+
+		localStorage.clear();
 	});
 
 	it(("Muestra la imagen del pokémon elegido con la data de la API"), () => {
