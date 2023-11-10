@@ -122,3 +122,13 @@ describe(("mostrarIdPokemonElegido"), ()=>{
 		expect(document.querySelector(".id-pokemon-elegido").textContent).toEqual(`# ${dataPokemon.id}`);
 	});
 });
+
+describe(("mostrarNombrePokemonElegido"), () => {
+	it(("Debería mostrar el nombre del pokémon elegido"), () =>{
+		document.body.innerHTML = fixtureCartaPokemonElegido;
+		const dataPokemon = {"name": "test"};
+
+		mostrarNombrePokemonElegido(dataPokemon);
+		expect(document.querySelector(".nombre-pokemon-elegido").textContent).toEqual(dataPokemon.name);
+	});
+});
