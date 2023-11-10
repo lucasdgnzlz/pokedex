@@ -101,4 +101,12 @@ describe(("mostrarImagenPokemonElegido"), () => {
 
 		expect(document.querySelector(".imagen-pokemon-elegido").src).toEqual(dataCargadaDeLocalStorage.sprites);
 	});
+
+	it(("Muestra la imagen del pokémon elegido con la data de la API"), () => {
+		document.body.innerHTML = fixtureCartaPokemonElegido;
+		const dataPokemon = fixturePokemonDePrueba;
+
+		mostrarImagenPokemonElegido(dataPokemon);
+		expect(document.querySelector(".imagen-pokemon-elegido").src).toEqual(dataPokemon.sprites["front_default"]);
+	});
 });
