@@ -58,3 +58,17 @@ describe(("mostrarIdentificacionPokemon"), () => {
 		expect(document.querySelectorAll(".numero-identificacion-pokemon")[INDICADOR_POSICION_DE_PRUEBA].textContent).toContain(dataDePrueba.id);
 	});
 });
+
+describe(("mostrarTiposPokemon"), ()=>{
+	it(("Muestra el tipo de un pokémon de un solo tipo"), () => {
+		document.body.innerHTML = fixtureCartasPokemon;
+		const INDICADOR_POSICION_DE_PRUEBA = 3;
+		const dataPokemon = fixturePokemonDePrueba;
+
+		const tipoPokemon = dataPokemon.types["0"]["type"]["name"];
+
+		mostrarTiposPokemon(dataPokemon, INDICADOR_POSICION_DE_PRUEBA);
+
+		expect(document.querySelectorAll(".primer-tipo")[INDICADOR_POSICION_DE_PRUEBA].src).toEqual(`http://localhost/img/${tipoPokemon}.svg`);
+	});
+});
