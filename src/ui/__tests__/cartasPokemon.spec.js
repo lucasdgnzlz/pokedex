@@ -116,7 +116,7 @@ describe(("mostrarImagenPokemonElegido"), () => {
 describe(("mostrarIdPokemonElegido"), ()=>{
 	it(("Debería mostrar el ID del pokémon elegido"), () => {
 		document.body.innerHTML = fixtureCartaPokemonElegido;
-		const dataPokemon = fixturePokemonDePrueba;
+		const dataPokemon = {"id": 33};
 
 		mostrarIdPokemonElegido(dataPokemon);
 		expect(document.querySelector(".id-pokemon-elegido").textContent).toEqual(`# ${dataPokemon.id}`);
