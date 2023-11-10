@@ -132,3 +132,15 @@ describe(("mostrarNombrePokemonElegido"), () => {
 		expect(document.querySelector(".nombre-pokemon-elegido").textContent).toEqual(dataPokemon.name);
 	});
 });
+
+describe(("mostrarTiposPokemonElegido"), () => {
+	it(("Muestra el tipo de un pokémon elegido de un solo tipo"), () =>{
+		document.body.innerHTML = fixtureCartaPokemonElegido;
+		const dataPokemon = fixturePokemonDePrueba;
+		const tipoPokemon = dataPokemon.types["0"]["type"]["name"];
+
+		mostrarTiposPokemonElegido(dataPokemon);
+
+		expect(document.querySelector(".primer-tipo-pokemon-elegido").src).toEqual(`http://localhost/img/${tipoPokemon}.svg`);
+	});
+});
