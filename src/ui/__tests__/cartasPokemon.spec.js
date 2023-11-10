@@ -189,3 +189,16 @@ describe(("mostrarCartaPokemonElegido"), () => {
 		expect(document.querySelector(".carta-respuesta").id).toEqual("");
 	});
 });
+
+describe(("ocultarCartaPokemonElegido"), () => {
+	it(("Debería ocultar la carta del pokémon elegido"),() => {
+		document.body.innerHTML = fixtureCartaPokemonElegido;
+		expect(document.querySelector(".carta-respuesta").id).toEqual("oculto");
+
+		mostrarCartaPokemonElegido();
+		expect(document.querySelector(".carta-respuesta").id).toEqual("");
+
+		ocultarCartaPokemonElegido();
+		expect(document.querySelector(".carta-respuesta").id).toEqual("oculto");
+	});
+});
