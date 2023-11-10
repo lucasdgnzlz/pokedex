@@ -178,3 +178,14 @@ describe(("mostrarStatsPokemon"), () => {
 		expect(document.querySelector(".velocidad-base-respuesta").textContent).toEqual(`${velocidadPokemon}`);
 	});
 });
+
+describe(("mostrarCartaPokemonElegido"), () => {
+	it(("Debería mostrar la carta del pokémon elegido"), () => {
+		document.body.innerHTML = fixtureCartaPokemonElegido;
+		expect(document.querySelector(".carta-respuesta").id).toEqual("oculto");
+
+		mostrarCartaPokemonElegido();
+
+		expect(document.querySelector(".carta-respuesta").id).toEqual("");
+	});
+});
