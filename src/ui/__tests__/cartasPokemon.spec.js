@@ -6,9 +6,11 @@
 
 import { mostrarImagenPokemon, mostrarNombrePokemon, mostrarIdentificacionPokemon, mostrarTiposPokemon, mostrarImagenPokemonElegido, mostrarIdPokemonElegido, mostrarNombrePokemonElegido, mostrarTiposPokemonElegido, mostrarStatsPokemon, ocultarCartaPokemonElegido, mostrarCartaPokemonElegido} from "../cartasPokemon.js";
 import { guardarDataPokemonEnLocalStorage, cargarDataPokemonDeLocalStorage } from "../../storage/pokedex.js";
+
 import fixturePokemonDePrueba from "../../../cypress/fixtures/charmander.json";
 import segundoFixturePokemon from "../../../cypress/fixtures/venusaur.json";
 import fixtureCartasPokemon from "../../../cypress/fixtures/cartasPokemon.fixture.js";
+import fixtureCartaPokemonElegido from "../../../cypress/fixtures/cartaPokemonElegido.fixture.js";
 
 describe(("mostrarImagenPokemon"), () =>{
 	it(("Muestra la imagen del pokémon con la data traida de la API"), () => {
@@ -84,5 +86,19 @@ describe(("mostrarTiposPokemon"), ()=>{
 
 		expect(document.querySelectorAll(".primer-tipo")[INDICADOR_POSICION_DE_PRUEBA].src).toEqual(`http://localhost/img/${tiposPokemon[0]}.svg`);
 		expect(document.querySelectorAll(".segundo-tipo")[INDICADOR_POSICION_DE_PRUEBA].src).toEqual(`http://localhost/img/${tiposPokemon[1]}.svg`);
+	});
+});
+
+describe(("mostrarImagenPokemonElegido"), () => {
+	it(("Muestra la imagen del pokemon elegido con data cargada de LocalStorage"), () => {
+		document.body.innerHTML = fixtureCartaPokemonElegido;
+		const dataPokemon = fixturePokemonDePrueba;
+
+		guardarDataPokemonEnLocalStorage(dataPokemon);
+		
+		const dataCargadaDeLocalStorage = cargarDataPokemonDeLocalStorage(dataPokemon.id);
+		mostrarImagenPokemonElegido(dataCargadaDeLocalStorage);
+
+		expect(document.querySelector(".imagen-pokemon-elegido").src).toEqual(dataCargadaDeLocalStorage.sprites);
 	});
 });
