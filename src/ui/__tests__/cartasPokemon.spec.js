@@ -143,4 +143,15 @@ describe(("mostrarTiposPokemonElegido"), () => {
 
 		expect(document.querySelector(".primer-tipo-pokemon-elegido").src).toEqual(`http://localhost/img/${tipoPokemon}.svg`);
 	});
+
+	it(("Muestra el tipo de un pokémon elegido de un solo tipo"), () =>{
+		document.body.innerHTML = fixtureCartaPokemonElegido;
+		const dataPokemon = segundoFixturePokemon;
+		const tiposPokemon = [dataPokemon.types["0"]["type"]["name"], dataPokemon.types["1"]["type"]["name"]];
+
+		mostrarTiposPokemonElegido(dataPokemon);
+
+		expect(document.querySelector(".primer-tipo-pokemon-elegido").src).toEqual(`http://localhost/img/${tiposPokemon[0]}.svg`);
+		expect(document.querySelector(".segundo-tipo-pokemon-elegido").src).toEqual(`http://localhost/img/${tiposPokemon[1]}.svg`);
+	});
 });
