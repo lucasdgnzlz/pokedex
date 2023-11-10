@@ -7,7 +7,8 @@
 import { mostrarImagenPokemon, mostrarNombrePokemon, mostrarIdentificacionPokemon, mostrarTiposPokemon, mostrarImagenPokemonElegido, mostrarIdPokemonElegido, mostrarNombrePokemonElegido, mostrarTiposPokemonElegido, mostrarStatsPokemon, ocultarCartaPokemonElegido, mostrarCartaPokemonElegido} from "../cartasPokemon.js";
 import { guardarDataPokemonEnLocalStorage, cargarDataPokemonDeLocalStorage } from "../../storage/pokedex.js";
 import fixturePokemonDePrueba from "../../../cypress/fixtures/charmander.json";
-import fixtureCartasPokemon from "./fixtures/cartasPokemon.fixture.js";
+import segundoFixturePokemon from "../../../cypress/fixtures/venusaur.json";
+import fixtureCartasPokemon from "../../../cypress/fixtures/cartasPokemon.fixture.js";
 
 describe(("mostrarImagenPokemon"), () =>{
 	it(("Muestra la imagen del pokémon con la data traida de la API"), () => {
@@ -70,5 +71,18 @@ describe(("mostrarTiposPokemon"), ()=>{
 		mostrarTiposPokemon(dataPokemon, INDICADOR_POSICION_DE_PRUEBA);
 
 		expect(document.querySelectorAll(".primer-tipo")[INDICADOR_POSICION_DE_PRUEBA].src).toEqual(`http://localhost/img/${tipoPokemon}.svg`);
+	});
+
+	it(("Muestra los tipos de un pokémon con más de un tipo"), () => {
+		document.body.innerHTML = fixtureCartasPokemon;
+		const INDICADOR_POSICION_DE_PRUEBA = 3;
+		const dataPokemon = segundoFixturePokemon;
+
+		const tiposPokemon = [dataPokemon.types["0"]["type"]["name"], dataPokemon.types["1"]["type"]["name"]];
+
+		mostrarTiposPokemon(dataPokemon, INDICADOR_POSICION_DE_PRUEBA);
+
+		expect(document.querySelectorAll(".primer-tipo")[INDICADOR_POSICION_DE_PRUEBA].src).toEqual(`http://localhost/img/${tiposPokemon[0]}.svg`);
+		expect(document.querySelectorAll(".segundo-tipo")[INDICADOR_POSICION_DE_PRUEBA].src).toEqual(`http://localhost/img/${tiposPokemon[1]}.svg`);
 	});
 });
