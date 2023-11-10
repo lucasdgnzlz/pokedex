@@ -47,3 +47,14 @@ describe(("mostrarNombrePokemon"), () => {
 		expect(document.querySelectorAll(".nombre-pokemon")[INDICADOR_POSICION_DE_PRUEBA].textContent).toContain(dataPokemonDePrueba.name);
 	});
 });
+
+describe(("mostrarIdentificacionPokemon"), () => {
+	it(("Muestra el ID del pokémon que corresponde según el posicionamiento"), () => {
+		document.body.innerHTML = fixtureCartasPokemon;
+		const dataDePrueba = {"id": "Test"};
+		const INDICADOR_POSICION_DE_PRUEBA = 3;
+
+		mostrarIdentificacionPokemon(dataDePrueba, INDICADOR_POSICION_DE_PRUEBA);
+		expect(document.querySelectorAll(".numero-identificacion-pokemon")[INDICADOR_POSICION_DE_PRUEBA].textContent).toContain(dataDePrueba.id);
+	});
+});
