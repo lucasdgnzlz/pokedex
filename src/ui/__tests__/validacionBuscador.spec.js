@@ -18,6 +18,7 @@ describe(("mostrarErrorValidacionBuscador"), () => {
 
 		expect(document.querySelector(".buscador-pokemon").placeholder).toEqual(mensajeError);
 		expect(document.querySelector(".buscador-pokemon").id).toEqual("error-validacion");
+		expect(document.querySelector(".buscador-pokemon").classList).toContain("is-invalid");
 	});
 });
 
@@ -32,10 +33,12 @@ describe(("eliminarErrorValidacion"), () => {
 
 		expect(document.querySelector(".buscador-pokemon").placeholder).toEqual(mensajeError);
 		expect(document.querySelector(".buscador-pokemon").id).toEqual("error-validacion");
+		expect(document.querySelector(".buscador-pokemon").classList).toContain("is-invalid");
 
 		eliminarErrorValidacion();
 
 		expect(document.querySelector(".buscador-pokemon").placeholder).toEqual("Seleccione un Pokémon!");
 		expect(document.querySelector(".buscador-pokemon").id).toEqual("");
+		expect(document.querySelector(".buscador-pokemon").classList).not.toContain("is-invalid");
 	});
 });
