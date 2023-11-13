@@ -6,9 +6,9 @@ export default `<div class="contenedor-cambio-pagina">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item pagina-item active"><a class="page-link indicador-pagina">1</a></li>
-    <li class="page-item pagina-item"><a class="page-link indicador-pagina">2</a></li>
-    <li class="page-item pagina-item"><a class="page-link indicador-pagina">3</a></li>
+    <li class="page-item pagina-item active"><a class="page-link indicador-pagina">3</a></li>
+    <li class="page-item pagina-item"><a class="page-link indicador-pagina">4</a></li>
+    <li class="page-item pagina-item"><a class="page-link indicador-pagina">5</a></li>
     <li class="page-item indicador-estado-siguiente">
       <a class="page-link boton-siguiente-pagina" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
