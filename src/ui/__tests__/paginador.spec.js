@@ -21,11 +21,26 @@ describe(("esconderPaginador"), () => {
 	it(("Debería esconder el paginador"), () => {
 		document.body.innerHTML = paginadorFixture;
 		const $paginador = document.querySelector(".contenedor-cambio-pagina");
-
 		expect($paginador.id).toEqual("");
 
 		esconderPaginador();
 
 		expect($paginador.id).toEqual("oculto");
+	});
+});
+
+describe(("mostrarPaginador"), () => {
+	it(("Debería devolverle la visibilidad al paginador"), () => {
+		document.body.innerHTML = paginadorFixture;
+		const $paginador = document.querySelector(".contenedor-cambio-pagina");
+		expect($paginador.id).toEqual("");
+
+		esconderPaginador();
+
+		expect($paginador.id).toEqual("oculto");
+
+		mostrarPaginador();
+
+		expect($paginador.id).toEqual("");
 	});
 });
