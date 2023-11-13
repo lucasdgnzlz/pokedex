@@ -13,18 +13,21 @@ export function actualizarNumerosIndicadorPagina(accionar, $indicadoresPagina, i
 
 	if (accionar === accionesModal[0]) {
 		let numeroAImprimir = indicadorPaginaSolicitada;
+
 		$indicadoresPagina.forEach(($indicador) => {
 			$indicador.textContent = numeroAImprimir;
 			numeroAImprimir++;
 		});
 	} else if (accionar === accionesModal[1]) {
 		let numeroAImprimir = indicadorPaginaSolicitada + 2;
+
 		$indicadoresPagina.forEach(($indicador) => {
 			$indicador.textContent = numeroAImprimir;
 			numeroAImprimir++;
 		});
 	} else if (accionar === accionesModal[2]) {
 		let numeroAImprimir = indicadorPaginaSolicitada + 1;
+		
 		$indicadoresPagina.forEach(($indicador) => {
 			$indicador.textContent = numeroAImprimir;
 			numeroAImprimir++;
