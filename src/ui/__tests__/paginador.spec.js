@@ -148,3 +148,14 @@ describe(("actualizarNumerosIndicadorPagina"), () => {
 		});
 	});
 });
+
+describe(("desactivarPaginaActiva"), () => {
+	it(("Debería eliminar remarcado sobre el indicador de la página activa"), () => {
+		document.body.innerHTML = paginadorFixture;
+		const $paginaActiva = document.querySelector(".active");
+
+		expect($paginaActiva.classList).toContain("active");
+		desactivarPaginaActiva();
+		expect($paginaActiva.classList).not.toContain("active");
+	});
+});
