@@ -224,3 +224,17 @@ describe(("desactivarBotonSiguientePagina"), () => {
 		expect($estadoBotonSiguiente.classList).toContain("disabled");
 	});
 });
+
+describe(("activarBotonSiguientePagina"), () => {
+	it(("Debería activar el botón 'siguiente' del paginador"), () => {
+		document.body.innerHTML = paginadorFixture;
+		const $estadoBotonSiguiente = document.querySelector(".indicador-estado-siguiente");
+		expect($estadoBotonSiguiente.classList).not.toContain("disabled");
+
+		desactivarBotonSiguientePagina();
+		expect($estadoBotonSiguiente.classList).toContain("disabled");
+
+		activarBotonSiguientePagina();
+		expect($estadoBotonSiguiente.classList).not.toContain("disabled");
+	});
+});
