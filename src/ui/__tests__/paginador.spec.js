@@ -164,3 +164,23 @@ describe(("desactivarPaginaActiva"), () => {
 		expect($paginaActiva.classList).not.toContain("active");
 	});
 });
+
+describe(("mostrarNumeroPaginaActiva"), () => {
+	it(("Debería activar un indicador de pagina según el parámetro indicado"), () => {
+		document.body.innerHTML = paginadorFixture;
+		const $paginaActualActiva = document.querySelector(".active");
+		const $indicadorPaginaActivar = document.querySelectorAll(".pagina-item")[1];
+		const indicadorPagina = $indicadorPaginaActivar.textContent - 1;
+
+		expect($paginaActualActiva.classList).toContain("active");
+		expect($indicadorPaginaActivar.classList).not.toContain("active");
+
+		mostrarNumeroPaginaActiva(indicadorPagina);
+
+		expect($paginaActualActiva.classList).toContain("active");
+		expect($paginaActualActiva.textContent).toBe("3");
+		
+		expect($indicadorPaginaActivar.classList).toContain("active");
+		expect($indicadorPaginaActivar.textContent).toBe("4");
+	});
+});
