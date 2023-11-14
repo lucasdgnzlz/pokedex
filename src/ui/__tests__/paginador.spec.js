@@ -153,9 +153,14 @@ describe(("desactivarPaginaActiva"), () => {
 	it(("Debería eliminar remarcado sobre el indicador de la página activa"), () => {
 		document.body.innerHTML = paginadorFixture;
 		const $paginaActiva = document.querySelector(".active");
+		let indicadorPagina = $paginaActiva.textContent;
 
 		expect($paginaActiva.classList).toContain("active");
+		expect(indicadorPagina).toContain("3");
+
 		desactivarPaginaActiva();
+		
+		expect(indicadorPagina).toContain("3");
 		expect($paginaActiva.classList).not.toContain("active");
 	});
 });
