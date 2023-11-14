@@ -123,4 +123,28 @@ describe(("actualizarNumerosIndicadorPagina"), () => {
 			expect(Number($pagina.textContent)).toEqual(numerosAObtener[i]);
 		});
 	});
+
+	it(("Debería retornar en false al pasarle 'accionar' distinto a los parámetros guardados"), () => {
+		document.body.innerHTML = paginadorFixture;
+		const $indicadoresPagina = document.querySelectorAll(".indicador-pagina");
+		const paginaActual = document.querySelector(".active");
+
+		const numerosEnPaginador = [];
+		const accionarDePrueba = "error";
+		const paginaSolicitada = paginaActual + 1;
+
+		$indicadoresPagina.forEach(($pagina) => {
+			numerosEnPaginador.push(Number($pagina.textContent));
+		});
+
+		$indicadoresPagina.forEach(($pagina, i) => {
+			expect(Number($pagina.textContent)).toEqual(numerosEnPaginador[i]);
+		});
+
+		expect(actualizarNumerosIndicadorPagina(accionarDePrueba, $indicadoresPagina, paginaSolicitada)).toBe(false);
+
+		$indicadoresPagina.forEach(($pagina, i) => {
+			expect(Number($pagina.textContent)).toEqual(numerosEnPaginador[i]);
+		});
+	});
 });
