@@ -179,8 +179,21 @@ describe(("mostrarNumeroPaginaActiva"), () => {
 
 		expect($paginaActualActiva.classList).toContain("active");
 		expect($paginaActualActiva.textContent).toBe("3");
-		
+
 		expect($indicadorPaginaActivar.classList).toContain("active");
 		expect($indicadorPaginaActivar.textContent).toBe("4");
+	});
+});
+
+describe(("activarBotonAnteriorPagina"), () => {
+	it(("Debería activar el botón 'anterior' del paginador"), () => {
+		document.body.innerHTML = paginadorFixture;
+		const $estadoBotonAnterior = document.querySelector(".indicador-estado-anterior");
+		
+		expect($estadoBotonAnterior.classList).toContain("disabled");
+
+		activarBotonAnteriorPagina();
+
+		expect($estadoBotonAnterior.classList).not.toContain("disabled");
 	});
 });
