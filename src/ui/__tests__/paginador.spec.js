@@ -197,3 +197,18 @@ describe(("activarBotonAnteriorPagina"), () => {
 		expect($estadoBotonAnterior.classList).not.toContain("disabled");
 	});
 });
+
+describe(("desactivarBotonAnteriorPagina"), () => {
+	it(("Debería desactivar el botón 'anterior' del paginador"), () => {
+		document.body.innerHTML = paginadorFixture;
+		const $estadoBotonAnterior = document.querySelector(".indicador-estado-anterior");
+		expect($estadoBotonAnterior.classList).toContain("disabled");
+
+		activarBotonAnteriorPagina();
+
+		expect($estadoBotonAnterior.classList).not.toContain("disabled");
+
+		desactivarBotonAnteriorPagina();
+		expect($estadoBotonAnterior.classList).toContain("disabled");
+	});
+});
