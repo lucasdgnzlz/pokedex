@@ -1,4 +1,23 @@
-export default `<div class="row contenedor-estructura-main" id="oculto">
+export default `
+<header id="oculto">
+      <div class="contenedor-logo">
+        <img src="img/logo-pokemon.png" class="logo-pokemon" />
+      </div>
+      <div class="contenedor-buscador">
+        <div class="input-group">
+          <input
+            type="number"
+            class="form-control buscador-pokemon"
+            aria-label="buscar-pokemon"
+            placeholder="Seleccione un Pokémon!"
+            id=""
+          />
+          <button type="button" class="btn btn-outline-secondary boton-buscar-pokemon">Buscar</button>
+        </div>
+      </div>
+</header>
+
+<div class="row contenedor-estructura-main" id="oculto">
 <div class="col pattern-diagonal-stripes-lg columna-decoracion"></div>
 
 <div class="col-10 columna-contenido">
