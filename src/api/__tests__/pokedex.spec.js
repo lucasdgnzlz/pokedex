@@ -5,6 +5,7 @@
 
 import { URL_BASE, LIMITE_POKEMONES,  hacerSolicitud, buscarPokemonEspecifico } from "../pokedex";
 import listaPokemonFixture from "../../../cypress/fixtures/listado-pagina-3.json";
+import pokemonFixture from "../../../cypress/fixtures/electivire.json";
 
 beforeEach(() => {
 	global.fetch = jest.fn();
