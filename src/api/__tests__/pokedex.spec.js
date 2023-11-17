@@ -10,6 +10,8 @@ beforeEach(() => {
 	global.fetch = jest.fn();
 });
 
+console.error = jest.fn();
+
 describe(("hacerSolicitud"), () => {
 	it(("Carga lista de 20 pokémones"), () => {
 		global.fetch = jest.fn()
@@ -26,5 +28,13 @@ describe(("hacerSolicitud"), () => {
     
 		expect(global.fetch).toHaveBeenCalledTimes(1);
 		expect(global.fetch).toHaveBeenCalledWith(`${URL_BASE}?offset=${INDICADOR_POKEMON}&limit=${LIMITE_POKEMONES}`);
+	});
+
+	it(("Debería dar error al pasar como parámetro un indicador erróneo"), async () => {
+		const indicadorDePrueba = "prueba";
+		global.fetch.mockRejectedValue(new Error ("Error en la solicitud a la API"));
+
+		await hacerSolicitud(indicadorDePrueba);
+		expect(console.error).toHaveBeenCalledWith(new Error ("Error en la solicitud a la API"));
 	});
 });
