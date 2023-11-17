@@ -13,7 +13,7 @@ export async function hacerSolicitud(indicadorPokemon) {
 
 export async function buscarPokemonEspecifico(idPokemon) {
 	try {
-		const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`);
+		const respuesta = await fetch(`${URL_BASE}/${idPokemon}`);
 		const data = await respuesta.json();
 		return data;
 	} catch (error) {
