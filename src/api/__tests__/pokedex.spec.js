@@ -57,4 +57,12 @@ describe(("buscarPokemonEspecifico"), () => {
 		expect(global.fetch).toHaveBeenCalledTimes(1);
 		expect(global.fetch).toHaveBeenCalledWith(`${URL_BASE}/${ID_POKEMON}`);
 	});
+
+	it(("Debería controlar el error al pasarle un parámetro erróneo"), async () => {
+		const ID_POKEMON_PRUEBA = "prueba";
+		global.fetch.mockRejectedValue(new Error ("Error en la solicitud a la API"));
+
+		await buscarPokemonEspecifico(ID_POKEMON_PRUEBA);
+		expect(console.error).toHaveBeenCalledWith(new Error ("Error en la solicitud a la API"));
+	});
 });
