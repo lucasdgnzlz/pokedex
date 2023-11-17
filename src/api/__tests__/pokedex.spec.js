@@ -39,3 +39,22 @@ describe(("hacerSolicitud"), () => {
 		expect(console.error).toHaveBeenCalledWith(new Error ("Error en la solicitud a la API"));
 	});
 });
+
+describe(("buscarPokemonEspecifico"), () => {
+	it(("Devuelve la data de un pokémon específico"), () => {
+		global.fetch = jest.fn()
+			.mockImplementation(() => new Promise ((resolve) =>{
+				const jsonPromise = new Promise ((r) => {
+					r(pokemonFixture);
+				});
+				resolve({ json: () => jsonPromise});
+			}));
+    
+		const ID_POKEMON = 466;
+
+		buscarPokemonEspecifico(ID_POKEMON);
+    
+		expect(global.fetch).toHaveBeenCalledTimes(1);
+		expect(global.fetch).toHaveBeenCalledWith(`${URL_BASE}/${ID_POKEMON}`);
+	});
+});
